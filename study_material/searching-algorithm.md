@@ -86,5 +86,10 @@ function jumpSearch(arr, target) {
    
 `Time Complexity: O(√n) - Square Root Time Complexity`
 
+![image](https://github.com/user-attachments/assets/b7812964-8bb8-4129-8d68-9b8a0f81fab5)
+![image](https://github.com/user-attachments/assets/04608fd5-2a45-4c12-bdb4-4997e30c8905)
+
+
+
 
 # GAMBAR
