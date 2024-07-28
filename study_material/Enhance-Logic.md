@@ -24,4 +24,62 @@ const hasilKurang = kurang(10, 4);
 
 console.log("Hasil tambah:", hasilTambah);
 console.log("Hasil kurang:", hasilKurang);
+```
 
+## Paradigma Berorientasi Objek
+Paradigma ini berfokus pada pemodelan dunia nyata dengan menggunakan objek yang memiliki properti dan metode. Contoh di bawah ini adalah contoh sederhana pembuatan objek "Manusia."
+
+```js
+class Manusia {
+  constructor(nama, umur) {
+    this.nama = nama;
+    this.umur = umur;
+  }
+
+  perkenalan() {
+    return `Halo, nama saya ${this.nama} dan saya berumur ${this.umur} tahun.`;
+  }
+}
+
+const orang = new Manusia("John", 25);
+console.log(orang.perkenalan());
+```
+
+## Paradigma Pemrograman Fungsional
+Paradigma ini berfokus pada fungsi sebagai unit dasar. Fungsi dapat diteruskan sebagai argumen dan mengembalikan nilai.
+
+```js
+const angka = [1, 2, 3, 4, 5];
+
+const kuadratkan = angka.map(function(item) {
+  return item * item;
+});
+
+console.log(kuadratkan); // Output: [1, 4, 9, 16, 25]
+
+```
+
+## Paradigma Pemrograman Logika
+Paradigma ini berfokus pada pemrograman berdasarkan aturan dan fakta logika. Prolog adalah contoh bahasa pemrograman yang berbasis pada paradigma logika.
+
+```js
+// Ini bukan Prolog, tetapi contoh serupa
+function manusia(X) {
+  mempunyai(X, kulit);
+}
+
+function mempunyai(seseorang, objek) {
+  return true; // Logika dapat diimplementasikan sesuai kebutuhan
+}
+
+const seseorang = "John";
+const objek = "kulit";
+
+if (manusia(seseorang) && mempunyai(seseorang, objek)) {
+  console.log(`${seseorang} memiliki ${objek}.`);
+}
+
+```
+
+
+Kalau kalian lihat, hampir semua paradigma kalian sudah pelajarin di phase 0. Cuman paradigma orientasi objek saja yang belum kita pelajari, jadi kita bakal fokus belajar object oriented programming (OOP) di week 1.
