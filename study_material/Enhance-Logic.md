@@ -1,3 +1,5 @@
+# Enhance Logic
+
 Sekarang kalian berada di week 1 phase 1, dimana di week ini terakhirnya kalinya kalian bertemu dengan logic, karena next week dan seterusnya tugas-tugas kalian bukan lagi cuman tentang soal algoritma dan jawaban di console.log. Di week 1 ini kalian akan belajar tentang paradigma programming lain yaitu (OOP) dan algoritma-algoritma next level yang bakal berguna di interview kerja nanti. Kalian juga bakal belajar data struktur baru seperti graph, belajar lebih tentang terminal, cara membuat parameter, dan animasi di terminal.
 
 Langsung saja kita mulai week 1 dan materi pertama kita adalah paradigma pemrograman.
