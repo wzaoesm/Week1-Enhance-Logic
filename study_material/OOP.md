@@ -47,3 +47,118 @@ Dalam skenario ini:
 *   `greet` adalah metode yang dapat dipanggil pada objek untuk menjalankan perilaku tertentu.
     
 Ini adalah contoh sederhana tentang bagaimana OOP dapat diimplementasikan dalam JavaScript menggunakan kelas dan konsep konstruktor, metode, dan properti. Dalam proyek yang lebih besar, konsep ini akan membantu Kalian mengorganisir kode dengan lebih baik dan membuat struktur yang lebih terkelola.
+
+## Sifat OOP
+
+berikut adalah penjelasan singkat tentang beberapa sifat utama Pemrograman Berorientasi Objek (OOP) beserta contoh kode untuk masing-masing:
+
+### Inheritance (Pewarisan)
+Inheritance memungkinkan Kalian untuk membuat kelas baru berdasarkan kelas yang sudah ada. Kelas baru ini dapat mewarisi properti dan metode dari kelas yang sudah ada (kelas induk atau superclass).
+
+Contoh:
+```js
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a sound.`);
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    console.log(`${this.name} barks.`);
+  }
+}
+
+const dog = new Dog('Buddy');
+dog.speak(); // Output: Buddy barks.
+```
+
+Dalam contoh ini, kelas Dog mewarisi properti name dan metode speak dari kelas Animal.
+
+### Polymorphism (Polimorfisme)
+Polimorfisme memungkinkan objek dengan tipe yang berbeda untuk merespons metode yang sama sesuai dengan tipe mereka sendiri. Ini memungkinkan fleksibilitas dalam pemanggilan metode.
+
+Contoh:
+```js
+class Shape {
+  area() {
+    return 0;
+  }
+}
+
+class Circle extends Shape {
+  constructor(radius) {
+    super();
+    this.radius = radius;
+  }
+
+  area() {
+    return Math.PI * this.radius ** 2;
+  }
+}
+
+class Rectangle extends Shape {
+  constructor(width, height) {
+    super();
+    this.width = width;
+    this.height = height;
+  }
+
+  area() {
+    return this.width * this.height;
+  }
+}
+
+const circle = new Circle(5);
+const rectangle = new Rectangle(4, 6);
+
+console.log(circle.area()); // Output: 78.53981633974483
+console.log(rectangle.area()); // Output: 24
+```
+
+Dalam contoh ini, meskipun metode area digunakan untuk objek circle dan rectangle, hasilnya akan disesuaikan dengan jenis bentuk yang sesuai.
+
+### Encapsulation (Enkapsulasi)
+Enkapsulasi melibatkan penyembunyian detail internal dari objek dan hanya mengizinkan akses terbatas melalui antarmuka publik yang ditentukan. Ini membantu dalam memisahkan responsibilitas dan mencegah perubahan langsung pada properti objek.
+
+Contoh:
+```js
+class BankAccount {
+  constructor(balance) {
+    this._balance = balance;
+  }
+
+  get balance() {
+    return this._balance;
+  }
+
+  deposit(amount) {
+    if (amount > 0) {
+      this._balance += amount;
+    }
+  }
+
+  withdraw(amount) {
+    if (amount > 0 && amount <= this._balance) {
+      this._balance -= amount;
+    }
+  }
+}
+
+const account = new BankAccount(1000);
+console.log(account.balance); // Output: 1000
+
+account.deposit(500);
+console.log(account.balance); // Output: 1500
+
+account.withdraw(200);
+console.log(account.balance); // Output: 1300
+```
+
+Dalam contoh ini, properti _balance dienkapsulasi dan hanya dapat diakses melalui metode balance, deposit, dan withdraw.
+
+Inilah beberapa sifat utama dalam Pemrograman Berorientasi Objek. Masing-masing sifat ini membantu Kalian membangun kode yang lebih terorganisir, fleksibel, dan mudah diatur.
