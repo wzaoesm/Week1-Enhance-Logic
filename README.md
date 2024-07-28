@@ -1,5 +1,5 @@
 # week1-Enhance-Logic
-Dalam 1 minggu ini kalian akan mengulas lagi `logic` kalian untuk terakhir kalinya, tetapi ini akan sedikit berbeda dari sebelumnya
+Dalam 1 minggu ini kalian akan mengulas lagi **logic** kalian untuk terakhir kalinya, tetapi ini akan sedikit berbeda dari sebelumnya
 kalian akan belajar beberapa algoritma baru yang akan mempermudah kalian kedepanya
 
 ## Week 1 Enhance Logic (Berurutan) 
