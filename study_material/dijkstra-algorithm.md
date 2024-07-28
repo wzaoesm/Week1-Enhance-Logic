@@ -206,4 +206,138 @@ Semoga visualisasi ini membantu Anda memahami cara kerja Dijkstra's Algorithm!
 
 # Belajar contoh implementasi Dijkstra’s Algorithm pada soal competitive programming.
 
+## Deskripsi Soal:
+Kalian diminta untuk mengimplementasikan sebuah fungsi shortestPathWeightedGraph yang akan menghitung jarak terpendek antara dua simpul pada sebuah graph berbobot. Graph tersebut akan diwakili oleh objek JavaScript yang memiliki properti-properti sebagai simpul-simpulnya dan nilai-nilai sebagai koneksi antar simpul dengan bobot yang terhubung.
 
+## Tugas:
+1. Implementasikan fungsi `shortestPathWeightedGraph` dengan tiga parameter:
+- graph (objek): Representasi graph berbobot dalam bentuk objek. Setiap properti dalam objek merepresentasikan sebuah simpul dan memiliki nilai yang merupakan array dari objek-objek yang menyatakan tetangga-tetangganya beserta bobotnya. Contohnya: 'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }] menyatakan bahwa simpul 'A' terhubung ke simpul 'B' dengan bobot 3 dan ke simpul 'C' dengan bobot 2.
+- start (string): Nama simpul awal.
+- target (string): Nama simpul tujuan.
+
+2. Fungsi tersebut harus mengembalikan jarak terpendek dari simpul start ke simpul target dalam graph berbobot yang diberikan. Jika tidak ada jalur yang memungkinkan, fungsi harus mengembalikan nilai -1.
+
+Contoh:
+Misalkan terdapat graph berbobot berikut:
+```
+A --3-- B --1-- C --2-- D
+```
+
+Graph tersebut dapat direpresentasikan dalam bentuk objek sebagai berikut:
+```js
+{
+  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
+  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
+  'C': [{ node: 'D', weight: 2 }],
+  'D': []
+}
+```
+
+Jika kita ingin mencari jarak terpendek dari simpul 'A' ke simpul 'D', maka fungsi harus mengembalikan nilai 4.
+Contoh code jawab soal tersebut:
+
+```js
+function shortestPathWeightedGraph(graph, start, target) {
+  const INF = Number.MAX_SAFE_INTEGER; // Jarak tak terhingga untuk inisialisasi
+  const distances = {}; // Menyimpan jarak terpendek dari start ke setiap simpul
+  const visited = new Set(); // Menandai simpul yang sudah dikunjungi
+  const priorityQueue = []; // Priority queue sederhana
+
+  // Inisialisasi jarak dari start ke semua simpul dengan tak terhingga
+  for (const node in graph) {
+    distances[node] = INF;
+  }
+
+  distances[start] = 0; // Jarak dari start ke start adalah 0
+  priorityQueue.push([start, 0]); // Masukkan simpul start ke priority queue dengan jarak 0
+
+  // Loop hingga priority queue kosong
+  while (priorityQueue.length > 0) {
+    priorityQueue.sort((a, b) => a[1] - b[1]); // Urutkan berdasarkan jarak terpendek
+    const [currentNode, currentDistance] = priorityQueue.shift(); // Ambil simpul dengan jarak terpendek dari priority queue
+
+    if (visited.has(currentNode)) {
+      continue; // Lewati jika simpul sudah dikunjungi sebelumnya
+    }
+
+    visited.add(currentNode); // Tandai simpul sebagai dikunjungi
+
+    // Iterasi melalui tetangga dari simpul saat ini
+    for (const { node: neighbor, weight } of graph[currentNode]) {
+      const totalDistance = currentDistance + weight;
+      // Update jarak terpendek jika totalDistance lebih kecil dari jarak sebelumnya
+      if (totalDistance < distances[neighbor]) {
+        distances[neighbor] = totalDistance;
+        priorityQueue.push([neighbor, totalDistance]); // Masukkan simpul tetangga ke priority queue
+      }
+    }
+  }
+
+  // Kembalikan jarak terpendek dari start ke target, jika tidak ada jalur, kembalikan -1
+  return distances[target] !== INF ? distances[target] : -1;
+}
+
+// Implementasi Dijkstra's Algorithm dimulai dari fungsi shortestPathWeightedGraph
+// yang menerima graph berbobot, simpul awal, dan simpul tujuan. Kode tersebut
+// melakukan inisialisasi variabel dan priority queue, lalu iterasi melalui simpul-simpul
+// untuk mencari jarak terpendek dari start ke target.
+// Setelah selesai, fungsi mengembalikan jarak terpendek atau -1 jika tidak ada jalur.
+
+// Testcase 1
+console.log(shortestPathWeightedGraph({
+  // Visualisasi graph:
+  //   A --3-- B --1-- C --2-- D
+  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
+  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
+  'C': [{ node: 'D', weight: 2 }],
+  'D': []
+}, 'A', 'D')); // Output: 4
+
+// Testcase 2
+console.log(shortestPathWeightedGraph({
+  // Visualisasi graph:
+  //   A --3-- B --1-- C --2-- D
+  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
+  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
+  'C': [{ node: 'D', weight: 2 }],
+  'D': []
+}, 'B', 'D')); // Output: 3
+
+// Testcase 3
+console.log(shortestPathWeightedGraph({
+  // Visualisasi graph:
+  //   A --3-- B --1-- C --2-- D
+  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
+  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
+  'C': [{ node: 'D', weight: 2 }],
+  'D': []
+}, 'A', 'A')); // Output: 0
+
+// Testcase 4
+console.log(shortestPathWeightedGraph({
+  // Visualisasi graph:
+  //   A --3-- B --1-- C --2-- D
+  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
+  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
+  'C': [{ node: 'D', weight: 2 }],
+  'D': []
+}, 'C', 'B')); // Output: -1
+```
+
+berikut penjelasan dari jawaban tersebut:
+
+1. Inisialisasi Variabel: Pada awalnya, kode membuat variabel INF yang merepresentasikan jarak tak terhingga, objek distances untuk menyimpan jarak terpendek dari start ke setiap simpul, visited sebagai himpunan untuk menyimpan simpul yang sudah dikunjungi, dan priorityQueue sebagai antrean prioritas sederhana.
+
+2. Inisialisasi Jarak: Loop pertama for (const node in graph) digunakan untuk menginisialisasi jarak dari simpul start ke semua simpul lainnya dengan nilai tak terhingga, kecuali simpul start sendiri yang diinisialisasi dengan 0.
+
+3. Algoritma Dijkstra's: Selanjutnya, algoritma Dijkstra dimulai dengan menggunakan priority queue yang diurutkan berdasarkan jarak terpendek. Ini memastikan bahwa simpul dengan jarak terpendek selalu diambil dari antrian terlebih dahulu.
+
+4. Pengolahan Simpul: Setelah mengambil simpul dengan jarak terpendek dari priority queue, kode memeriksa apakah simpul tersebut sudah dikunjungi sebelumnya. Jika sudah, maka simpul dilewati.
+
+5. Pengolahan Tetangga: Selanjutnya, kode melakukan iterasi melalui tetangga-tetangga dari simpul saat ini. Untuk setiap tetangga, total jarak dari start ke tetangga tersebut dihitung dan dibandingkan dengan jarak sebelumnya. Jika total jarak lebih kecil, maka jarak terpendek diperbarui dan tetangga dimasukkan ke dalam priority queue.
+
+6. Kembali Hasil: Setelah semua simpul telah diproses, hasil akhir ditemukan di objek distances. Jika jarak terpendek dari start ke target tidak berubah (masih tak terhingga), maka dikembalikan nilai -1, menandakan bahwa tidak ada jalur dari start ke target.
+
+7. Testcase dan Implementasi: Di bawah komentar "Testcase 1" dan seterusnya, terdapat pemanggilan fungsi shortestPathWeightedGraph dengan graph dan testcase yang berbeda. Kode ini menguji algoritma Dijkstra dengan contoh kasus dan mencetak hasil ke konsol.
+
+Keseluruhan implementasi di atas menggunakan pendekatan Dijkstra's Algorithm untuk mencari jarak terpendek antara simpul start dan target pada graph berbobot. Komentar pada kode menjelaskan langkah-langkah yang diambil dalam algoritma untuk memastikan pemahaman yang lebih baik.
