@@ -92,4 +92,5 @@ function bubbleSort(array) {
 }
 ```
 
-# GAMBAR
+![image](https://github.com/user-attachments/assets/eb2944ae-6dd0-4043-a3fd-fab67fb5ecc0)
+
