@@ -14,7 +14,7 @@ kalian akan belajar beberapa algoritma baru yang akan mempermudah kalian kedepan
 - [Dijkstra's Algorithm](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/dijkstra-algorithm.md)
 - [Logic Nolep (dijkstra) :exploding_head: ](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/logic_nolep/ln-dijkstra.md)
 - [Huffman Coding Algorithm](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/huffman-coding-algorithm.md)
-- [Hashin Algoritm](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/hashing-algoritm.md)
+- [Hashing Algoritm](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/hashing-algoritm.md)
 - [Process Argv](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/process-argv.md)
 
 Mari Lanjut ke minggu selanjutnya, [LET'S GOOOO :rocket::rocket::rocket::rocket: ](https://github.com/RPN-Phase-1/Week2-Backend-Fundamental-MVC)
