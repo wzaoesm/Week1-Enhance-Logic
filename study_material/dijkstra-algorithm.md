@@ -18,191 +18,150 @@ Setelah algoritma selesai, Kalian akan memiliki informasi tentang jarak terpende
 Contoh penggunaan Dijkstra's Algorithm dalam JavaScript:
 
 ```js
-function dijkstra(graph, startNode) {
-  const distances = {}; // Menyimpan jarak terpendek dari startNode ke setiap simpul
-  const visited = new Set(); // Menandai simpul-simpul yang sudah dikunjungi
-  const queue = []; // Antrian prioritas untuk simpul-simpul yang akan dieksplorasi
-
-  // Inisialisasi jarak awal dan antrian
-  for (const node in graph) {
-    distances[node] = node === startNode ? 0 : Infinity;
-    queue.push({ node, distance: distances[node] });
-  }
-
-  // Looping utama
-  while (queue.length > 0) {
-    queue.sort((a, b) => a.distance - b.distance);
-    const { node } = queue.shift();
-
-    if (visited.has(node)) continue;
-
-    visited.add(node);
-
-    for (const neighbor in graph[node]) {
-      const distance = distances[node] + graph[node][neighbor];
-      if (distance < distances[neighbor]) {
-        distances[neighbor] = distance;
-        queue.push({ node: neighbor, distance });
-      }
+class PriorityQueue {
+    constructor() {
+        this.elements = [];
     }
-  }
 
-  return distances;
+    enqueue(element, priority) {
+        this.elements.push({ element, priority });
+        this.elements.sort((a, b) => a.priority - b.priority);
+    }
+
+    dequeue() {
+        return this.elements.shift().element;
+    }
+
+    isEmpty() {
+        return this.elements.length === 0;
+    }
 }
 
-// Contoh graf berbobot dalam bentuk objek
+function dijkstra(graph, start) {
+    const distances = {};
+    const previous = {};
+    const pq = new PriorityQueue();
+
+    // Inisialisasi
+    for (let vertex in graph) {
+        if (vertex === start) {
+            distances[vertex] = 0;
+            pq.enqueue(vertex, 0);
+        } else {
+            distances[vertex] = Infinity;
+            pq.enqueue(vertex, Infinity);
+        }
+        previous[vertex] = null;
+    }
+
+    while (!pq.isEmpty()) {
+        const currentVertex = pq.dequeue();
+
+        for (let neighbor in graph[currentVertex]) {
+            const distance = distances[currentVertex] + graph[currentVertex][neighbor];
+
+            if (distance < distances[neighbor]) {
+                distances[neighbor] = distance;
+                previous[neighbor] = currentVertex;
+                pq.enqueue(neighbor, distance);
+            }
+        }
+    }
+
+    return { distances, previous };
+}
+
+function getPath(previous, end) {
+    const path = [];
+    let current = end;
+
+    while (current !== null) {
+        path.unshift(current);
+        current = previous[current];
+    }
+
+    return path;
+}
+
+// Definisi graf
 const graph = {
-  A: { B: 5, C: 2 },
-  B: { A: 5, C: 1, D: 3 },
-  C: { A: 2, B: 1, D: 8 },
-  D: { B: 3, C: 8 }
+    A: { B: 7, E: 1 },
+    B: { A: 7, C: 3, E: 8 },
+    C: { B: 3, D: 6, E: 2 },
+    D: { C: 6, E: 7 },
+    E: { A: 1, B: 8, C: 2, D: 7 }
 };
 
 const startNode = 'A';
-const shortestDistances = dijkstra(graph, startNode);
-console.log(shortestDistances); // Hasil jarak terpendek dari simpul A ke semua simpul lain
+const { distances, previous } = dijkstra(graph, startNode);
+
+console.log("Jarak terpendek dari node A:");
+for (let node in distances) {
+    console.log(`Ke ${node}: ${distances[node]}`);
+    const path = getPath(previous, node);
+    console.log(`  Jalur: ${path.join(' -> ')}`);
+}
 ```
 
 Kapan kita harus menggunakan Dijkstra's Algorithm?
 
 Dijkstra's Algorithm sangat berguna ketika Kalian perlu mencari jalur terpendek antara dua simpul dalam graf berbobot. Ini dapat digunakan dalam berbagai konteks seperti perutean jaringan, navigasi peta, perencanaan perjalanan, dan lain-lain. Namun, algoritma ini bekerja efisien hanya pada graf yang tidak memiliki bobot negatif. Jika graf Kalian memiliki bobot negatif, Kalian mungkin perlu mempertimbangkan algoritma lain seperti Bellman-Ford Algorithm.
 
-contoh visualisasi langkah demi langkah dari Dijkstra's Algorithm menggunakan contoh graf berikut:
+contoh visualisasi langkah demi langkah dari Dijkstra's Algorithm dari Node A ke semua node menggunakan contoh graf berikut:
 
-```
-      5       2
-  A ----- B ----- C
-  |  \  /      |  |
-  |   \/       |  |
-  |   /\       |  |
-  |  /  \      |  |
-  D ----- E ----- F
-       3       8
-```
-Graf ini memiliki simpul A, B, C, D, E, dan F, serta sisi-sisi dengan bobot yang ditunjukkan di atas masing-masing sisi.
+![image](https://github.com/user-attachments/assets/5b10d2f5-74aa-43d9-8123-4d09669352d2)
 
-Langkah 1: Inisialisasi
-- Jarak awal dari simpul awal (A) ke semua simpul lain adalah tak terbatas, kecuali jarak dari A ke dirinya sendiri adalah 0.
-- Kami memasukkan semua simpul ke dalam antrian prioritas, dengan jarak terpendek pertama.
+Graf ini memiliki simpul A, B, C, D, dan E, serta sisi-sisi dengan bobot yang ditunjukkan di atas masing-masing sisi.
 
-Langkah 2: Iterasi
-- Ambil simpul dengan jarak terpendek dari antrian (di sini adalah simpul A).
-- Periksa semua tetangga simpul ini (B dan D).
-- Hitung jarak baru melalui simpul saat ini ke tetangga. Jika jarak baru lebih pendek dari jarak sebelumnya, perbarui jarak.
-- Tandai simpul saat ini sebagai "dikunjungi".
-- Ulangi proses untuk simpul-simpul lain dalam antrian.
-
-Berikut adalah visualisasi langkah-langkahnya:
+## ***Langkah-langkah algoritma Dijkstra dari node A***:
 
 ### Langkah 1: Inisialisasi
+- Jarak ke A = 0
+- Jarak ke B, C, D, E = ∞ (tak terhingga)
+- Set node yang belum dikunjungi: {A, B, C, D, E}
 
-```
-     A (0)
-   /   |   \
-5 /    |    \ 2
- /     |     \
-B (∞) C (∞) D (∞)   E (∞) F (∞)
-```
+![image](https://github.com/user-attachments/assets/d3ed9ea7-8a17-409c-a625-199fd41328e4)
 
-### Langkah 2: Iterasi (Ambil simpul A)
-- Jarak terpendek dari A ke B adalah 5.
-- Jarak terpendek dari A ke D adalah 3.
+### Langkah 2: Mulai dari node A
+- Periksa tetangga A: B (jarak 7) dan E (jarak 1)
+- Perbarui jarak: B = 7, E = 1
+- Tandai A sebagai dikunjungi
+- Set yang belum dikunjungi: {B, C, D, E} dari jarak sebelumnya, perbarui jarak.
 
-```
-     A (0)
-   /   |   \
-5 /    |    \ 2
- /     |     \
-B (5)  C (∞) D (3)   E (∞) F (∞)
-```
+![image](https://github.com/user-attachments/assets/4dbf23a8-951a-4e09-a048-33902527c13e)
 
-### Langkah 3: Iterasi (Ambil simpul D)
-- Jarak terpendek dari A ke D melalui D adalah 3.
-- Jarak terpendek dari A ke E adalah ∞ (belum diketahui).
-```
-     A (0)
-   /   |   \
-5 /    |    \ 2
- /     |     \
-B (5)  C (∞) D (3)   E (∞) F (∞)
-            |
-            8
-```
+### Langkah 3: Pilih node dengan jarak terkecil yang belum dikunjungi (E):
+- Periksa tetangga E: B (8+1=9), C (2+1=3), D (7+1=8)
+- Perbarui jarak: B tetap 7, C = 3, D = 8
+- Tandai E sebagai dikunjungi
+- Set yang belum dikunjungi: {B, C, D}
 
-### Langkah 4: Iterasi (Ambil simpul B)
-- Jarak terpendek dari A ke B melalui D adalah 3 + 3 = 6.
-- Jarak terpendek dari A ke C adalah ∞ (belum diketahui).
-- Jarak terpendek dari A ke E adalah 5 (tidak berubah).
+![image](https://github.com/user-attachments/assets/67260b16-b807-4691-a4d4-317d1a41b465)
 
-```
-     A (0)
-   /   |   \
-5 /    |    \ 2
- /     |     \
-B (5)  C (∞) D (3)   E (5) F (∞)
-        |
-        8
-```
+### Langkah 4: Pilih node dengan jarak terkecil yang belum dikunjungi (C):
+- Periksa tetangga C: B (3+3=6), D (6+3=9)
+- Perbarui jarak: B = 6 (baru), D tetap 8
+- Tandai C sebagai dikunjungi
+- Set yang belum dikunjungi: {B, D}
 
-### Langkah 5: Iterasi (Ambil simpul E)
-- Jarak terpendek dari A ke E melalui D adalah 3 + 3 + 3 = 9.
-- Jarak terpendek dari A ke C adalah ∞ (belum diketahui).
+![image](https://github.com/user-attachments/assets/33d21a62-9dc5-4ca4-83de-efba1f38db02)
 
-```
-     A (0)
-   /   |   \
-5 /    |    \ 2
- /     |     \
-B (5)  C (∞) D (3)   E (5) F (∞)
-        |
-        8
-        |
-        8
-```
+### Langkah 5: Pilih node dengan jarak terkecil yang belum dikunjungi (B):
+- Periksa tetangga B: D (tidak perlu diperiksa karena C dan D sudah dikunjungi)
+- Tidak ada pembaruan jarak
+- Tandai B sebagai dikunjungi
+- Set yang belum dikunjungi: {D}
 
-### Langkah 6: Iterasi (Ambil simpul C)
-- Jarak terpendek dari A ke C melalui D adalah 3 + 3 = 6.
-```
-     A (0)
-   /   |   \
-5 /    |    \ 2
- /     |     \
-B (5)  C (6) D (3)   E (5) F (14)
-        |
-        8
-        |
-        8
-```
+![image](https://github.com/user-attachments/assets/eda8a195-e67a-45ae-bb7c-2b69515fa7fc)
 
-### Langkah 7: Iterasi (Ambil simpul F)
-- Jarak terpendek dari A ke F melalui D adalah 3 + 3 + 8 = 14.
+### Langkah 6: Kunjungi node terakhir (D):
+- Tidak ada tetangga yang belum dikunjungi
+- Tandai D sebagai dikunjungi
+- Semua node telah dikunjungi
 
-
-Hasil akhir adalah jarak terpendek dari A ke semua simpul lain:
-A -> A: 0
-A -> B: 5
-A -> C: 6
-A -> D: 3
-A -> E: 5
-A -> F: 14
-
-```
-     A (0)
-   /   |   \
-5 /    |    \ 2
- /     |     \
-B (5)  C (6) D (3)   E (5) F (14)
-        |
-        8
-        |
-        8
-```
+![image](https://github.com/user-attachments/assets/b79de2f1-ff4d-4e06-a0c5-9bf1f72eb411)
 
 Semoga visualisasi ini membantu Anda memahami cara kerja Dijkstra's Algorithm!
-
-Semoga visualisasi ini membantu Anda memahami cara kerja Dijkstra's Algorithm!
-
-#
 
 # Belajar contoh implementasi Dijkstra’s Algorithm pada soal competitive programming.
 
@@ -218,7 +177,7 @@ Kalian diminta untuk mengimplementasikan sebuah fungsi shortestPathWeightedGraph
 2. Fungsi tersebut harus mengembalikan jarak terpendek dari simpul start ke simpul target dalam graph berbobot yang diberikan. Jika tidak ada jalur yang memungkinkan, fungsi harus mengembalikan nilai -1.
 
 Contoh:
-Misalkan terdapat graph berbobot berikut:
+Misalkan terdapat graph dengan bobot berikut:
 ```
 A --3-- B --1-- C --2-- D
 ```
