@@ -1,41 +1,60 @@
 # LOGIC NOLEP (dijkstra.js)
 
+## Jalur Terpendek Antar Kota di Indonesia
+
 **Deskripsi Soal**:
 
-Kalian diminta untuk mengimplementasikan fungsi shortestPathDijkstraArray yang akan menghitung jarak terpendek antara dua simpul pada sebuah graph berbobot dengan bobot non-negatif. Graph tersebut direpresentasikan dalam bentuk array dua dimensi yang menyatakan bobot antara simpul-simpul. Elemen graph[i][j] pada array merepresentasikan bobot dari simpul i ke simpul j. Jika tidak ada sisi yang menghubungkan simpul i dan j, maka graph[i][j] akan bernilai -1.
+Anda adalah seorang perencana perjalanan yang sedang merancang rute terbaik untuk wisatawan yang ingin mengunjungi beberapa kota besar di Indonesia. Anda memiliki informasi tentang jarak langsung antar kota (dalam kilometer) sebagai berikut:
+
+- Jakarta (JKT)
+- Surabaya (SBY)
+- Bandung (BDG)
+- Yogyakarta (YOG)
+- Semarang (SMG)
+- Medan (MDN)
+- Makassar (MKS)
+
+Jarak antar kota (dalam km):
+
+- Jakarta - Bandung: 150
+- Jakarta - Semarang: 450
+- Bandung - Yogyakarta: 400
+- Semarang - Surabaya: 350
+- Yogyakarta - Surabaya: 300
+- Surabaya - Makassar: 900
+- Semarang - Yogyakarta: 130
+- Jakarta - Medan: 1800
+- Medan - Makassar: 2500
 
 **Tugas**:
 
-Implementasikan fungsi shortestPathDijkstraArray dengan tiga parameter:
+Jawablah Pertanyaan2 berikut menggunakan bahasa pemrograman javascript:
 
-- graph (array): Representasi graph berbobot dalam bentuk array dua dimensi.
-
-- start (number): Nomor simpul awal.
-
-- target (number): Nomor simpul tujuan.
+1. Apa jalur terpendek dari Jakarta ke Surabaya? Berapa total jaraknya?
+2. Jika seorang wisatawan ingin melakukan perjalanan dari Medan ke Yogyakarta, apa rute terpendek yang harus dia ambil? Berapa total jarak yang harus ditempuh?
+3. Seorang pengusaha perlu melakukan perjalanan dari Bandung ke Makassar. Apa rute terpendek yang bisa dia ambil dan berapa total jaraknya?
+4. Jika ada jalan baru yang dibangun langsung dari Jakarta ke Yogyakarta sejauh 500 km, apakah ini akan mengubah jalur terpendek dari Jakarta ke Surabaya? Jika ya, bagaimana rute barunya dan berapa jaraknya?
+6. Buatlah table semuajarak antar kota menggunakan `console.table()`
 
 Fungsi shortestPathDijkstraArray harus mengembalikan jarak terpendek dari simpul start ke simpul target dalam graph berbobot yang diberikan. Jika tidak ada jalur yang memungkinkan, fungsi harus mengembalikan nilai -1.
 
 **Contoh**:
 Misalkan terdapat graph berbobot berikut:
 
-```js
-Graph:
-  0 --3-- 1 --1-- 2
-  |        |
-  4 --2-- 3
-```
+![image](https://github.com/user-attachments/assets/a93b8e04-d9b3-4b39-8224-8bafc49703a2)
 
 Graph tersebut dapat direpresentasikan dalam bentuk array dua dimensi sebagai berikut:
 
 ```
-const graph = [
-  [-1, 3, -1, -1, -1],
-  [3, -1, 1, 1, -1],
-  [-1, 1, -1, -1, -1],
-  [-1, 1, -1, -1, 2],
-  [-1, -1, -1, 2, -1]
-];
+const graph = {
+    'JKT': { 'BDG': 150, 'SMG': 450, 'MDN': 1800 },
+    'SBY': { 'SMG': 350, 'YOG': 300, 'MKS': 900 },
+    'BDG': { 'JKT': 150, 'YOG': 400 },
+    'YOG': { 'BDG': 400, 'SBY': 300, 'SMG': 130 },
+    'SMG': { 'JKT': 450, 'SBY': 350, 'YOG': 130 },
+    'MDN': { 'JKT': 1800, 'MKS': 2500 },
+    'MKS': { 'SBY': 900, 'MDN': 2500 }
+};
 ```
 Jika kita ingin mencari jarak terpendek dari simpul 0 ke simpul 2, maka fungsi shortestPathDijkstraArray(graph, 0, 2) harus mengembalikan nilai 4.
 
@@ -43,71 +62,81 @@ Jika kita ingin mencari jarak terpendek dari simpul 0 ke simpul 2, maka fungsi s
 Pastikan Anda menggunakan Dijkstra's Algorithm untuk mencari jarak terpendek pada graph berbobot.
 
 ```js
-function shortestPathDijkstraArray(graph, start, target) {
-  // code
+// Definisi graf
+const graph = {
+    'JKT': { 'BDG': 150, 'SMG': 450, 'MDN': 1800 },
+    'SBY': { 'SMG': 350, 'YOG': 300, 'MKS': 900 },
+    'BDG': { 'JKT': 150, 'YOG': 400 },
+    'YOG': { 'BDG': 400, 'SBY': 300, 'SMG': 130 },
+    'SMG': { 'JKT': 450, 'SBY': 350, 'YOG': 130 },
+    'MDN': { 'JKT': 1800, 'MKS': 2500 },
+    'MKS': { 'SBY': 900, 'MDN': 2500 }
+};
+
+// Implementasi Priority Queue sederhana
+class PriorityQueue {
+    constructor() {
+        this.elements = [];
+    }
+    enqueue(element, priority) {
+        this.elements.push({element, priority});
+        this.elements.sort((a, b) => a.priority - b.priority);
+    }
+    dequeue() {
+        return this.elements.shift().element;
+    }
+    isEmpty() {
+        return this.elements.length === 0;
+    }
 }
 
-// Testcase 1
-console.log(shortestPathDijkstraArray(
-  [
-    [-1, 3, -1, -1, -1],
-    [3, -1, 1, 1, -1],
-    [-1, 1, -1, -1, -1],
-    [-1, 1, -1, -1, 2],
-    [-1, -1, -1, 2, -1]
-  ],
-  0,
-  2
-)); // Expected Output: 4
+// Fungsi Dijkstra
+function dijkstra(graph, start, end) {
+    const distances = {};
+    const previous = {};
+    const pq = new PriorityQueue();
+    // Tulis Code untuk 
 
-// Testcase 2
-console.log(shortestPathDijkstraArray(
-  [
-    [-1, 3, -1, -1, -1],
-    [3, -1, 1, 1, -1],
-    [-1, 1, -1, -1, -1],
-    [-1, 1, -1, -1, 2],
-    [-1, -1, -1, 2, -1]
-  ],
-  0,
-  4
-)); // Expected Output: 6
+    return { distances, previous };
+}
 
-// Testcase 3
-console.log(shortestPathDijkstraArray(
-  [
-    [-1, 3, -1, -1, -1],
-    [3, -1, 1, 1, -1],
-    [-1, 1, -1, -1, -1],
-    [-1, 1, -1, -1, 2],
-    [-1, -1, -1, 2, -1]
-  ],
-  1,
-  3
-)); // Expected Output: 1
+// Fungsi untuk mendapatkan jalur
+function getPath(previous, start, end) {
+    const path = [];
+    // Tulis code untuk mendapatkan jalur di sini
 
-// Testcase 4
-console.log(shortestPathDijkstraArray(
-  [
-    [-1, 2, -1, -1, -1],
-    [2, -1, 1, -1, 3],
-    [-1, 1, -1, 4, -1],
-    [-1, -1, 4, -1, 2],
-    [-1, 3, -1, 2, -1]
-  ],
-  0,
-  4
-)); // Expected Output: 5
+    return path;
+}
 
-// Testcase 5
-console.log(shortestPathDijkstraArray(
-  [
-    [-1, 1, 2, -1],
-    [1, -1, -1, 3],
-    [2, -1, -1, -1],
-    [-1, 3, -1, -1]
-  ],
-  0,
-  3
-)); // Expected Output: 4
+// Fungsi untuk menyelesaikan soal
+function solveQuestions() {
+    // TESTCASE 1. Jakarta ke Surabaya
+    let { distances, previous } = dijkstra(graph, 'JKT', 'SBY');
+    let path = getPath(previous, 'JKT', 'SBY');
+    console.log('1. Jalur terpendek Jakarta ke Surabaya:', path.join(' -> '), 'dengan jarak', distances['SBY'], 'km');
+    // Expected return: Jalur terpendek Jakarta ke Surabaya: JKT -> SMG -> SBY dengan jarak 800 km
+
+    // TESTCASE 2. Medan ke Yogyakarta
+    ({ distances, previous } = dijkstra(graph, 'MDN', 'YOG'));
+    path = getPath(previous, 'MDN', 'YOG');
+    console.log('2. Jalur terpendek Medan ke Yogyakarta:', path.join(' -> '), 'dengan jarak', distances['YOG'], 'km');
+    // Expected return: Jalur terpendek Medan ke Yogyakarta: MDN -> JKT -> BDG -> YOG dengan jarak 2350 km
+
+    // TESTCASE 3. Bandung ke Makassar
+    ({ distances, previous } = dijkstra(graph, 'BDG', 'MKS'));
+    path = getPath(previous, 'BDG', 'MKS');
+    console.log('3. Jalur terpendek Bandung ke Makassar:', path.join(' -> '), 'dengan jarak', distances['MKS'], 'km');
+    // Expected return: Jalur terpendek Bandung ke Makassar: BDG -> YOG -> SBY -> MKS dengan jarak 1600 km
+
+    // TESTCASE 4. Menambahkan jalan baru Jakarta ke Yogyakarta dengan jarak 500KM
+    graph['JKT']['YOG'] = 450;
+    graph['YOG']['JKT'] = 450;
+    ({ distances, previous } = dijkstra(graph, 'JKT', 'SBY'));
+    path = getPath(previous, 'JKT', 'SBY');
+    console.log('4. Setelah penambahan jalan baru, jalur terpendek Jakarta ke Surabaya:', path.join(' -> '), 'dengan jarak', distances['SBY'], 'km');
+    // Expected return: Setelah penambahan jalan baru, jalur terpendek Jakarta ke Surabaya: JKT -> YOG -> SBY dengan jarak 750 km
+}
+
+// Menjalankan solusi
+solveQuestions();
 ```
