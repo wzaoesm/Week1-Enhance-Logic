@@ -109,6 +109,7 @@ function getPath(previous, start, end) {
 }
 
 // Fungsi untuk menyelesaikan soal
+// FUNCTION DI BAWAH TIDAK BOLEH DI UBAH
 function solveQuestions() {
     // TESTCASE 1. Jakarta ke Surabaya
     let { distances, previous } = dijkstra(graph, 'JKT', 'SBY');
