@@ -1,4 +1,4 @@
-# Dijkstra’s Algorithm | Part 7
+# Dijkstra’s Algorithm
 
 Dijkstra's Algorithm adalah algoritma yang digunakan untuk mencari jalur terpendek dari satu simpul ke semua simpul lain dalam graf berbobot. Algoritma ini dinamakan setelah matematikawan Belanda Edsger W. Dijkstra dan merupakan salah satu algoritma yang paling umum digunakan dalam pemrosesan graf.
 
@@ -166,7 +166,8 @@ Semoga visualisasi ini membantu Anda memahami cara kerja Dijkstra's Algorithm!
 # Belajar contoh implementasi Dijkstra’s Algorithm pada soal competitive programming.
 
 ## Deskripsi Soal:
-Kalian diminta untuk mengimplementasikan sebuah fungsi shortestPathWeightedGraph yang akan menghitung jarak terpendek antara dua simpul pada sebuah graph berbobot. Graph tersebut akan diwakili oleh objek JavaScript yang memiliki properti-properti sebagai simpul-simpulnya dan nilai-nilai sebagai koneksi antar simpul dengan bobot yang terhubung.
+Kalian diminta untuk membuat program algoritma dijkstra untuk menghitung jarak terdekat, terdiri dari 3 parameter yaitu :
+- ***Graph***: 
 
 ## Tugas:
 1. Implementasikan fungsi `shortestPathWeightedGraph` dengan tiga parameter:
@@ -178,17 +179,18 @@ Kalian diminta untuk mengimplementasikan sebuah fungsi shortestPathWeightedGraph
 
 Contoh:
 Misalkan terdapat graph dengan bobot berikut:
-```
-A --3-- B --1-- C --2-- D
-```
+
+![image](https://github.com/user-attachments/assets/92187d25-b39e-4cf3-991e-352f77febe00)
 
 Graph tersebut dapat direpresentasikan dalam bentuk objek sebagai berikut:
 ```js
 {
-  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
-  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
-  'C': [{ node: 'D', weight: 2 }],
-  'D': []
+  'A': { 'B': 8, 'E': 3 },
+  'B': { 'A': 8, 'C': 5, 'E': 2 },
+  'C': { 'B': 5, 'D': 1, 'F': 3 },
+  'D': { 'C': 1, 'F': 5 },
+  'E': { 'A': 3, 'B': 2 },
+  'F': { 'C': 3, 'D': 5 }
 }
 ```
 
@@ -196,107 +198,277 @@ Jika kita ingin mencari jarak terpendek dari simpul 'A' ke simpul 'D', maka fung
 Contoh code jawab soal tersebut:
 
 ```js
-function shortestPathWeightedGraph(graph, start, target) {
-  const INF = Number.MAX_SAFE_INTEGER; // Jarak tak terhingga untuk inisialisasi
-  const distances = {}; // Menyimpan jarak terpendek dari start ke setiap simpul
-  const visited = new Set(); // Menandai simpul yang sudah dikunjungi
-  const priorityQueue = []; // Priority queue sederhana
-
-  // Inisialisasi jarak dari start ke semua simpul dengan tak terhingga
-  for (const node in graph) {
-    distances[node] = INF;
+class PriorityQueue {
+  constructor() {
+      this.elements = [];
   }
 
-  distances[start] = 0; // Jarak dari start ke start adalah 0
-  priorityQueue.push([start, 0]); // Masukkan simpul start ke priority queue dengan jarak 0
-
-  // Loop hingga priority queue kosong
-  while (priorityQueue.length > 0) {
-    priorityQueue.sort((a, b) => a[1] - b[1]); // Urutkan berdasarkan jarak terpendek
-    const [currentNode, currentDistance] = priorityQueue.shift(); // Ambil simpul dengan jarak terpendek dari priority queue
-
-    if (visited.has(currentNode)) {
-      continue; // Lewati jika simpul sudah dikunjungi sebelumnya
-    }
-
-    visited.add(currentNode); // Tandai simpul sebagai dikunjungi
-
-    // Iterasi melalui tetangga dari simpul saat ini
-    for (const { node: neighbor, weight } of graph[currentNode]) {
-      const totalDistance = currentDistance + weight;
-      // Update jarak terpendek jika totalDistance lebih kecil dari jarak sebelumnya
-      if (totalDistance < distances[neighbor]) {
-        distances[neighbor] = totalDistance;
-        priorityQueue.push([neighbor, totalDistance]); // Masukkan simpul tetangga ke priority queue
-      }
-    }
+  enqueue(element, priority) {
+      this.elements.push({ element, priority });
+      this.elements.sort((a, b) => a.priority - b.priority);
   }
 
-  // Kembalikan jarak terpendek dari start ke target, jika tidak ada jalur, kembalikan -1
-  return distances[target] !== INF ? distances[target] : -1;
+  dequeue() {
+      return this.elements.shift().element;
+  }
+
+  isEmpty() {
+      return this.elements.length === 0;
+  }
 }
 
-// Implementasi Dijkstra's Algorithm dimulai dari fungsi shortestPathWeightedGraph
-// yang menerima graph berbobot, simpul awal, dan simpul tujuan. Kode tersebut
-// melakukan inisialisasi variabel dan priority queue, lalu iterasi melalui simpul-simpul
-// untuk mencari jarak terpendek dari start ke target.
-// Setelah selesai, fungsi mengembalikan jarak terpendek atau -1 jika tidak ada jalur.
+function dijkstraExplained(graph, start, end) {
+  const distances = {};
+  const previous = {};
+  const pq = new PriorityQueue();
+  const visited = new Set();
 
-// Testcase 1
-console.log(shortestPathWeightedGraph({
-  // Visualisasi graph:
-  //   A --3-- B --1-- C --2-- D
-  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
-  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
-  'C': [{ node: 'D', weight: 2 }],
-  'D': []
-}, 'A', 'D')); // Output: 4
+  // Inisialisasi
+  for (let vertex in graph) {
+      if (vertex === start) {
+          distances[vertex] = 0;
+          pq.enqueue(vertex, 0);
+      } else {
+          distances[vertex] = Infinity;
+          pq.enqueue(vertex, Infinity);
+      }
+      previous[vertex] = null;
+  }
 
-// Testcase 2
-console.log(shortestPathWeightedGraph({
-  // Visualisasi graph:
-  //   A --3-- B --1-- C --2-- D
-  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
-  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
-  'C': [{ node: 'D', weight: 2 }],
-  'D': []
-}, 'B', 'D')); // Output: 3
+  console.log("Langkah-langkah Algoritma Dijkstra:");
 
-// Testcase 3
-console.log(shortestPathWeightedGraph({
-  // Visualisasi graph:
-  //   A --3-- B --1-- C --2-- D
-  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
-  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
-  'C': [{ node: 'D', weight: 2 }],
-  'D': []
-}, 'A', 'A')); // Output: 0
+  while (!pq.isEmpty()) {
+      const currentVertex = pq.dequeue();
+      
+      if (currentVertex === end) {
+          console.log(`\nNode tujuan ${end} tercapai. Algoritma selesai.`);
+          break;
+      }
 
-// Testcase 4
-console.log(shortestPathWeightedGraph({
-  // Visualisasi graph:
-  //   A --3-- B --1-- C --2-- D
-  'A': [{ node: 'B', weight: 3 }, { node: 'C', weight: 2 }],
-  'B': [{ node: 'C', weight: 1 }, { node: 'D', weight: 4 }],
-  'C': [{ node: 'D', weight: 2 }],
-  'D': []
-}, 'C', 'B')); // Output: -1
+      if (visited.has(currentVertex)) continue;
+      visited.add(currentVertex);
+
+      console.log(`\nMemeriksa node ${currentVertex}:`);
+
+      for (let neighbor in graph[currentVertex]) {
+          if (visited.has(neighbor)) continue;
+
+          const distance = distances[currentVertex] + graph[currentVertex][neighbor];
+          console.log(`  Tetangga ${neighbor}: jarak saat ini = ${distances[neighbor]}, jarak baru = ${distance}`);
+
+          if (distance < distances[neighbor]) {
+              distances[neighbor] = distance;
+              previous[neighbor] = currentVertex;
+              pq.enqueue(neighbor, distance);
+              console.log(`    Memperbarui jarak ke ${neighbor}: ${distance}`);
+          } else {
+              console.log(`    Tidak ada pembaruan untuk ${neighbor}`);
+          }
+      }
+  }
+
+  return { distances, previous };
+}
+
+function getPath(previous, start, end) {
+  const path = [];
+  let current = end;
+
+  while (current !== null) {
+      path.unshift(current);
+      if (current === start) break;
+      current = previous[current];
+  }
+
+  return path;
+}
+
+function findShortestPath(graph, start, end) {
+  const { distances, previous } = dijkstraExplained(graph, start, end);
+  const path = getPath(previous, start, end);
+
+  console.log(`\nJarak terpendek dari ${start} ke ${end}: ${distances[end]}`);
+  console.log(`Jalur: ${path.join(' -> ')}`);
+}
+
+// Contoh penggunaan
+// const startNode = 'B';
+// const endNode = 'F';
+
+const graph = {
+  'A': { 'B': 8, 'E': 3 },
+  'B': { 'A': 8, 'C': 5, 'E': 2 },
+  'C': { 'B': 5, 'D': 1, 'F': 3 },
+  'D': { 'C': 1, 'F': 5 },
+  'E': { 'A': 3, 'B': 2 },
+  'F': { 'C': 3, 'D': 5 }
+};
+
+// TESTCASE 3
+findShortestPath(graph, 'F', 'A'); 
+// Jarak terpendek dari B ke F: 8 
+// Jalur: B -> C -> F
+
+// TESTCASE 3
+findShortestPath(graph, 'A', 'F'); 
+// Jarak terpendek dari A ke F: 13
+// Jalur: A -> E -> B -> C -> F
+
+// TESTCASE 3
+findShortestPath(graph, 'C', 'E');
+// Jarak terpendek dari C ke E: 7
+// Jalur: C -> B -> E
 ```
 
 berikut penjelasan dari jawaban tersebut:
 
-1. Inisialisasi Variabel: Pada awalnya, kode membuat variabel INF yang merepresentasikan jarak tak terhingga, objek distances untuk menyimpan jarak terpendek dari start ke setiap simpul, visited sebagai himpunan untuk menyimpan simpul yang sudah dikunjungi, dan priorityQueue sebagai antrean prioritas sederhana.
+1. ***class PriorityQueue*** : Kita mendefinisikan kelas PriorityQueue untuk memprioritaskan node dengan jarak terkecil. terdiri connstructor, enqueue, dequeue, is empty.
 
-2. Inisialisasi Jarak: Loop pertama for (const node in graph) digunakan untuk menginisialisasi jarak dari simpul start ke semua simpul lainnya dengan nilai tak terhingga, kecuali simpul start sendiri yang diinisialisasi dengan 0.
+```js
+class PriorityQueue {
+    constructor() {
+        this.elements = [];
+    }
+```
 
-3. Algoritma Dijkstra's: Selanjutnya, algoritma Dijkstra dimulai dengan menggunakan priority queue yang diurutkan berdasarkan jarak terpendek. Ini memastikan bahwa simpul dengan jarak terpendek selalu diambil dari antrian terlebih dahulu.
+Mendefinisikan kelas PriorityQueue. Constructor menginisialisasi array kosong untuk menyimpan elemen.
 
-4. Pengolahan Simpul: Setelah mengambil simpul dengan jarak terpendek dari priority queue, kode memeriksa apakah simpul tersebut sudah dikunjungi sebelumnya. Jika sudah, maka simpul dilewati.
+```js
+enqueue(element, priority) {
+        this.elements.push({ element, priority });
+        this.elements.sort((a, b) => a.priority - b.priority);
+    }
+```
+Metode untuk menambahkan elemen ke queue dengan prioritas tertentu. Setelah menambahkan, array diurutkan berdasarkan prioritas.
 
-5. Pengolahan Tetangga: Selanjutnya, kode melakukan iterasi melalui tetangga-tetangga dari simpul saat ini. Untuk setiap tetangga, total jarak dari start ke tetangga tersebut dihitung dan dibandingkan dengan jarak sebelumnya. Jika total jarak lebih kecil, maka jarak terpendek diperbarui dan tetangga dimasukkan ke dalam priority queue.
+```js
+dequeue() {
+        return this.elements.shift().element;
+    }
+```
+Metode untuk menghapus dan mengembalikan elemen dengan prioritas tertinggi (di awal array).
 
-6. Kembali Hasil: Setelah semua simpul telah diproses, hasil akhir ditemukan di objek distances. Jika jarak terpendek dari start ke target tidak berubah (masih tak terhingga), maka dikembalikan nilai -1, menandakan bahwa tidak ada jalur dari start ke target.
+```js
+isEmpty() {
+        return this.elements.length === 0;
+    }
+}
+```
+Metode untuk memeriksa apakah queue kosong.
 
-7. Testcase dan Implementasi: Di bawah komentar "Testcase 1" dan seterusnya, terdapat pemanggilan fungsi shortestPathWeightedGraph dengan graph dan testcase yang berbeda. Kode ini menguji algoritma Dijkstra dengan contoh kasus dan mencetak hasil ke konsol.
 
-Keseluruhan implementasi di atas menggunakan pendekatan Dijkstra's Algorithm untuk mencari jarak terpendek antara simpul start dan target pada graph berbobot. Komentar pada kode menjelaskan langkah-langkah yang diambil dalam algoritma untuk memastikan pemahaman yang lebih baik.
+2. ***function dijkstraExplained***: Mengimplementasikan algoritma Dijkstra. Ini menghitung jarak terpendek dari node awal ke semua node lain dan juga menjelaskan tentang cara kerja Dijkstra dari tahap-bertahap .
+
+ ```js
+function dijkstraExplained(graph, start, end) {
+    const distances = {};
+    const previous = {};
+    const pq = new PriorityQueue();
+    const visited = new Set();
+``
+Fungsi utama algoritma Dijkstra. Inisialisasi variabel-variabel yang diperlukan.
+
+```js
+for (let vertex in graph) {
+        if (vertex === start) {
+            distances[vertex] = 0;
+            pq.enqueue(vertex, 0);
+        } else {
+            distances[vertex] = Infinity;
+            pq.enqueue(vertex, Infinity);
+        }
+        previous[vertex] = null;
+    }
+```
+Inisialisasi jarak awal dan memasukkan semua node ke dalam priority queue.
+
+```js
+console.log("Langkah-langkah Algoritma Dijkstra:");
+    while (!pq.isEmpty()) {
+        const currentVertex = pq.dequeue();
+```
+Mulai loop utama algoritma. Ambil node dengan jarak terkecil dari queue.
+
+```js
+if (currentVertex === end) {
+            console.log(`\nNode tujuan ${end} tercapai. Algoritma selesai.`);
+            break;
+        }
+```
+Periksa apakah node tujuan telah dicapai.
+
+```js
+if (visited.has(currentVertex)) continue;
+        visited.add(currentVertex);
+```
+Tandai node saat ini sebagai dikunjungi.
+
+```js
+const distance = distances[currentVertex] + graph[currentVertex][neighbor];
+            console.log(`  Tetangga ${neighbor}: jarak saat ini = ${distances[neighbor]}, jarak baru = ${distance}`);
+```
+Hitung jarak ke tetangga melalui node saat ini.
+
+```js
+if (distance < distances[neighbor]) {
+                distances[neighbor] = distance;
+                previous[neighbor] = currentVertex;
+                pq.enqueue(neighbor, distance);
+                console.log(`    Memperbarui jarak ke ${neighbor}: ${distance}`);
+            } else {
+                console.log(`    Tidak ada pembaruan untuk ${neighbor}`);
+            }
+        }
+    }
+    return { distances, previous };
+}
+```
+
+Update jarak jika ditemukan jalur yang lebih pendek.
+
+3. ***funtion getPath***: Fungsi getPath digunakan untuk merekonstruksi jalur dari node awal ke node tujuan.
+   
+```js
+function getPath(previous, start, end) {
+    const path = [];
+    let current = end;
+    while (current !== null) {
+        path.unshift(current);
+        if (current === start) break;
+        current = previous[current];
+    }
+    return path;
+}
+```
+
+
+4. ***function findShortestPath***: function findShortestPath digunakan untuk menemukan jalur terpendek, memanggil dijkstraExplained dan getPath.
+
+```js
+function findShortestPath(graph, start, end) {
+  const { distances, previous } = dijkstraExplained(graph, start, end);
+  const path = getPath(previous, start, end);
+
+  console.log(`\nJarak terpendek dari ${start} ke ${end}: ${distances[end]}`);
+  console.log(`Jalur: ${path.join(' -> ')}`);
+}
+```
+
+```js
+const startNode = 'A';
+const endNode = 'F';
+findShortestPath(graph, startNode, endNode);
+```
+Menjalankan algoritma dengan node awal 'A' dan node akhir 'F'.
+
+```js
+const graph = {
+    'A': { 'B': 8, 'E': 3 },
+    'B': { 'A': 8, 'C': 5, 'E': 2 },
+    'C': { 'B': 5, 'D': 1, 'F': 3 },
+    'D': { 'C': 1, 'F': 5 },
+    'E': { 'A': 3, 'B': 2 },
+    'F': { 'C': 3, 'D': 5 }
+};
+```
+Mendefinisikan struktur graf. Setiap kunci adalah node, dan nilainya adalah objek yang mewakili tetangga dengan bobot edge.
