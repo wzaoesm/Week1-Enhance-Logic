@@ -1,4 +1,4 @@
-# Searching Algorithm | Part 4
+# Searching Algorithm
 
 Algoritma pencarian (searching algorithm) adalah serangkaian langkah atau metode yang digunakan untuk menemukan keberadaan atau lokasi suatu elemen dalam himpunan data tertentu. Tujuan dari algoritma pencarian adalah untuk menemukan elemen yang dicari dengan efisien, terutama pada himpunan data yang besar.
 
