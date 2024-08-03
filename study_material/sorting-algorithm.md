@@ -33,6 +33,10 @@ bubbleSort(array);
 console.log("Array terurut:", array);
 ```
 
+contoh kerjanya seperti ini :
+<img src="https://i.postimg.cc/Tw5skvsM/bubble-sort.gif" />
+
+
 ## Selection Sort
 Selection Sort adalah algoritma pengurutan yang memilih elemen terkecil dari sisa array dan menukarkannya dengan elemen pertama dari array yang belum diurutkan.
 
@@ -64,6 +68,9 @@ selectionSort(array);
 console.log("Array terurut:", array);
 ```
 
+contoh kerjanya seperti ini :
+<img src="https://i.postimg.cc/brXBWFXG/selection-sort.gif" />
+
 ## Insertion Sort
 Insertion Sort bekerja dengan membandingkan setiap elemen dengan elemen-elemen sebelumnya dan memasukkannya ke posisi yang tepat dalam urutan yang sudah diurutkan.
 
@@ -93,6 +100,8 @@ insertionSort(array);
 console.log("Array terurut:", array);
 ```
 
+contoh kerjanya seperti ini :
+<img src="https://i.postimg.cc/9fnStQJY/insertion-sort.gif" />
 
 ## Merge Sort
 Merge Sort adalah algoritma pengurutan yang bekerja dengan cara membagi array menjadi dua bagian sama besar, mengurutkan masing-masing bagian secara terpisah, lalu menggabungkan kedua bagian yang telah diurutkan menjadi satu.
@@ -141,6 +150,11 @@ let array = [12, 11, 13, 5, 6, 7];
 let sortedArray = mergeSort(array);
 console.log("Array terurut:", sortedArray);
 ```
+
+contoh kerjanya seperti ini :
+<img src="https://i.postimg.cc/90GnhtVL/merge-sort.gif" />
+
+
 Pada implementasi Merge Sort, array dibagi menjadi dua bagian secara rekursif, setiap bagian diurutkan secara rekursif, dan akhirnya kedua bagian yang sudah diurutkan digabungkan menggunakan fungsi merge. Algoritma ini memiliki kecepatan waktu yang konstan dan cocok untuk mengurutkan array berukuran besar karena membagi array menjadi bagian kecil, mengurutkan masing-masing, dan menggabungkannya kembali secara terurut.
 
 - Time Complexity Sorting Algo
