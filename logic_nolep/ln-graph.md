@@ -113,7 +113,7 @@ console.log(islandCount([
 ])); 
 ```
 
-berarti jika di gambatkan seperti ini:
+jika di gambarkan seperti ini:
 ```js
 console.log(islandCount([
   [🏝︎, 🏝︎, 🌊, 🌊, 🏝︎],
