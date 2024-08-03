@@ -1,4 +1,4 @@
-# Process Argv | Part 10
+# Process Argv
 
 process.argv adalah properti dalam lingkungan Node.js yang berisi array argumen baris perintah yang digunakan saat menjalankan script Node.js. Argumen ini adalah input yang diberikan saat menjalankan script dari terminal atau command line.
 
