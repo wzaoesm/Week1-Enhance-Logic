@@ -1,4 +1,4 @@
-# Sorting Algorithm | Part 5
+# Sorting Algorithm
 
 orting algorithm adalah suatu metode atau algoritma yang digunakan untuk mengurutkan elemen-elemen dalam suatu koleksi atau array dalam urutan tertentu, seperti urutan numerik atau urutan alfabet. Tujuan utama dari sorting algorithm adalah untuk mengatur data dalam suatu urutan tertentu sehingga memudahkan proses pencarian atau analisis lebih lanjut.
 
