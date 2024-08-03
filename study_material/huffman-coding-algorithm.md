@@ -1,4 +1,4 @@
-# Huffman Coding Algorithm | Part 8
+# Huffman Coding Algorithm
 
 Huffman Coding Algorithm adalah metode kompresi data yang digunakan untuk mengurangi ukuran data dengan cara memberikan kode biner yang lebih pendek kepada simbol-simbol atau karakter-karakter yang lebih sering muncul dalam data. Algoritma ini merupakan salah satu metode kompresi lossless, yang artinya data yang dikompresi akan dapat dikembalikan ke bentuk aslinya tanpa kehilangan informasi.
 
@@ -137,21 +137,7 @@ Berikut adalah daftar simpul yang dibuat berdasarkan frekuensi kemunculan setiap
 
 Berdasarkan priority queue, kita bisa menggabungkan simpul-simpul dengan frekuensi terendah untuk membentuk pohon Huffman. Di bawah ini adalah visualisasi pohon Huffman yang terbentuk:
 
-```
-                      25
-                    /    \
-                   /      \
-                  13       12
-                 /  \      /   \
-                /    \    /     \
-               6      7  6      6
-              / \    /  / \     / \
-             n   m  _   l  g   i   t
-           / \                / \
-          x   p              e   a
-                                  \
-                                   h
-```
+![image](https://github.com/user-attachments/assets/5a30bf6c-68b5-45bb-bfe6-000ba4ad4d74)
 
 <br/>
 
