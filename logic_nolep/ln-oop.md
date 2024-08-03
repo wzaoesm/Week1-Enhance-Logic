@@ -4,27 +4,27 @@
 
 ```js
 class Bank {
-
+  // Tulis Code Disini
 }
 
 class Person {
-
+  // Tulis Code Disini
 }
 
 class Member {
-
+  // Tulis Code Disini
 }
 
 class Platinum extends Member{
-
+  // Tulis Code Disini
 }
 
 class Silver extends Member{
-
+  // Tulis Code Disini
 }
 
 class Transaction {
-
+  // Tulis Code Disini
 }
 
 // TESTCASE
