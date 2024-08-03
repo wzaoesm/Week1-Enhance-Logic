@@ -1,4 +1,4 @@
-# Time Complexity | Part 3
+# Time Complexity
 
 Time complexity adalah konsep dalam analisis algoritma yang digunakan untuk mengukur seberapa efisien sebuah algoritma dalam hal waktu yang dibutuhkan untuk menyelesaikan masalah berdasarkan ukuran inputnya. Dalam kata lain, time complexity mengukur berapa banyak operasi atau langkah yang diperlukan oleh algoritma dalam mengolah inputnya.
 
