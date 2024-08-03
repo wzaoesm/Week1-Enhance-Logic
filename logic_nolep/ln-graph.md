@@ -103,6 +103,26 @@ function shortestPath(friends, start, target) {
 **Deskripsi**:
 Anda diberikan sebuah peta yang direpresentasikan dalam bentuk matriks grid, di mana "1" mewakili daratan dan "0" mewakili air. Anda perlu menghitung jumlah pulau yang ada di peta. Pulau adalah area yang terdiri dari daratan yang saling berdekatan secara horizontal atau vertikal.
 
+Contoh:
+```js
+console.log(islandCount([
+  [1, 1, 0, 0, 1],
+  [1, 1, 0, 0, 0],
+  [0, 0, 0, 1, 0],
+  [1, 0, 0, 0, 0]
+])); 
+```
+
+berarti jika di gambatkan seperti ini:
+```js
+console.log(islandCount([
+  [🏝︎, 🏝︎, 🌊, 🌊, 🏝︎],
+  [🏝︎, 🏝︎, 🌊, 🌊, 🌊],
+  [🌊, 🌊, 🌊, 🏝︎, 🌊],
+  [🏝︎, 🌊, 🌊, 🌊, 🌊]
+])); 
+```
+
 Tuliskan sebuah fungsi yang mengambil input berupa matriks grid dan mengembalikan jumlah pulau yang ada.
 
 ```js
