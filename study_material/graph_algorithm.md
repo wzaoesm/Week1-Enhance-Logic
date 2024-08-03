@@ -1,4 +1,4 @@
-# Graph Algorithm | Part 6
+# Graph Algorithm
 
 Graph adalah struktur data yang terdiri dari simpul (node) dan sisi (edge) yang menghubungkan simpul-simpul tersebut. Graph digunakan untuk merepresentasikan berbagai jenis hubungan atau jaringan antara entitas. Ada dua jenis utama graph: directed (berarah) dan undirected (tak berarah).
 
