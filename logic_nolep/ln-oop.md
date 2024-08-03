@@ -1,41 +1,107 @@
 # LOGIC NOLEP (OOP.js)
 
-## Soal 1: Warisan (Inheritance) dan Metode
-Deskripsi: Buatlah kelas Shape dengan properti sides yang menunjukkan jumlah sisi bentuk. Buatlah kelas turunan Triangle dan Rectangle yang mewarisi dari Shape. Implementasikan metode area di masing-masing kelas turunan.
-
-`Contoh Input/Output:`
-```js
-const triangle = new Triangle(3, 4);
-console.log(triangle.area()); // Output: 6
-
-const rectangle = new Rectangle(5, 6);
-console.log(rectangle.area()); // Output: 30
-```
-
-## Soal 2: Polimorfisme dan Antarmuka
-Deskripsi: Buatlah kelas Vehicle dengan metode getInfo yang mengembalikan informasi umum tentang kendaraan. Buatlah kelas turunan Car dan Motorcycle yang mewarisi dari Vehicle dan mengimplementasikan metode getInfo yang spesifik.
-
-`Contoh Input/Output:`
-```js
-
-
-const car = new Car('Toyota', 'Corolla', 2020);
-console.log(car.getInfo()); // Output: Toyota Corolla 2020 Car
-
-const motorcycle = new Motorcycle('Honda', 'CBR', 2022);
-console.log(motorcycle.getInfo()); // Output: Honda CBR 2022 Motorcycle
-```
-
-## Soal 3: Enkapsulasi dan Validasi
-eskripsi: Buatlah kelas Student dengan properti name, age, dan grade. Pastikan bahwa umur berada dalam rentang 6 hingga 18 tahun, dan nilai berada dalam rentang 0 hingga 100. Implementasikan metode getInfo untuk mencetak informasi siswa.
-
-`Contoh Input/Output:`
+## Selesaikanlah masalah Bank dengan menggunakan structur object
 
 ```js
-const student1 = new Student('Alice', 12, 85);
-console.log(student1.getInfo()); // Output: Name: Alice, Age: 12, Grade: 85
+class Bank {
 
-const student2 = new Student('Bob', 20, 95);
-console.log(student2.getInfo()); // Output: Invalid Age or Grade
+}
+
+class Person {
+
+}
+
+class Member {
+
+}
+
+class Platinum extends Member{
+
+}
+
+class Silver extends Member{
+
+}
+
+class Transaction {
+
+}
+
+// TESTCASE
+// TIDAK BOLEH MENGUBAH CODE DI BAWAH INI
+
+let yudhistiraBank = new Bank('Yudhistira Bank')
+let nadia = new Person('Nadia')
+
+yudhistiraBank.register(nadia, 'platinum', 5000)
+// Expected: Saldo awal kurang dari minimum saldo yang ditentukan
+
+yudhistiraBank.register(nadia, 'platinum', 540000)
+// Expected: Selamat datang ke Yudhistira Bank, Nadia. Nomor Akun anda adalah 6332937. Total saldo adalah 54000
+
+let nadiaAccount = nadia.bankAccount
+
+/* PASTIKAN BAHWA SALDO SELALU BERKURANG ATAU BERTAMBAH UNTUK SETIAP TRANSAKSI */
+nadiaAccount.credit(300000)
+// Expected: Anda sukses menyimpan uang ke dalam bank.
+
+nadiaAccount.credit(1000)
+// Expected: Belum memenuhi minimal uang yang dapat di setor
+
+
+nadiaAccount.debet(200000, 'Beli Keyboard')
+// Expected: Anda sukses menarik uang dari bank
+
+nadiaAccount.debet(480000, 'Beli Keyboard Lagi')
+// Expected: Saldo minimum anda tidak terpenuhi untuk melakukan transaksi.
+
+nadiaAccount.debet(600000, 'Bisa gak ya lebih besar dari balance ? ')
+// Expected: Saldo anda tidak cukup
+
+let semmi = new Person('Semmi Verian')
+yudhistiraBank.register(semmi, 'silver', 10000000)
+let semmiAccount = semmi.bankAccount
+
+nadiaAccount.transfer(semmiAccount, 100000)
+// Anda sukses transfer ke Semmi Verian
+nadiaAccount.transfer(semmiAccount, 1000000)
+// Anda gagal transfer ke Semmi Verian
+
+console.log(nadiaAccount)
+// Expected: 
+// Platinum {
+//   memberName: 'Nadia',
+//   accountNumber: 5622164,
+//   minimumBalance: 50000,
+//   balance: 60000,
+//   transactions: [
+//     Transaction {
+//       nominal: 300000,
+//       status: 'credit',
+//       date: 2024-08-03T13:21:13.818Z,
+//       note: 'nyetor'
+//     },
+//     Transaction {
+//       nominal: 200000,
+//       status: 'debet',
+//       date: 2024-08-03T13:21:13.819Z,
+//       note: 'Beli Keyboard'
+//     },
+//     Transaction {
+//       nominal: 480000,
+//       status: 'debet',
+//       date: 2024-08-03T13:21:13.819Z,
+//       note: 'Beli Keyboard Lagi'
+//     },
+//     Transaction {
+//       nominal: 100000,
+//       status: 'debet',
+//       date: 2024-08-03T13:21:13.820Z,
+//       note: 'transfer ke akun Semmi Verian'
+//     }
+//   ],
+//   type: 'platinum'
+// }
 ```
-Catatan: Pastikan untuk memeriksa batasan umur dan nilai dalam konstruktor atau metode lainnya untuk menghindari data yang tidak valid.
+
+**Dilarang mengubah code testcase**
