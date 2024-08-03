@@ -109,7 +109,7 @@ Dijkstra's Algorithm sangat berguna ketika Kalian perlu mencari jalur terpendek 
 
 contoh visualisasi langkah demi langkah dari Dijkstra's Algorithm dari Node A ke semua node menggunakan contoh graf berikut:
 
-![image](https://github.com/user-attachments/assets/5b10d2f5-74aa-43d9-8123-4d09669352d2)
+![image](https://github.com/user-attachments/assets/b3e9d0ab-9414-486d-ab14-ecbc490948d8)
 
 Graf ini memiliki simpul A, B, C, D, dan E, serta sisi-sisi dengan bobot yang ditunjukkan di atas masing-masing sisi.
 
@@ -120,7 +120,7 @@ Graf ini memiliki simpul A, B, C, D, dan E, serta sisi-sisi dengan bobot yang di
 - Jarak ke B, C, D, E = ∞ (tak terhingga)
 - Set node yang belum dikunjungi: {A, B, C, D, E}
 
-![image](https://github.com/user-attachments/assets/d3ed9ea7-8a17-409c-a625-199fd41328e4)
+![image](https://github.com/user-attachments/assets/3c50ebab-383c-401c-a31b-ab2a356e382e)
 
 ### Langkah 2: Mulai dari node A
 - Periksa tetangga A: B (jarak 7) dan E (jarak 1)
@@ -128,7 +128,7 @@ Graf ini memiliki simpul A, B, C, D, dan E, serta sisi-sisi dengan bobot yang di
 - Tandai A sebagai dikunjungi
 - Set yang belum dikunjungi: {B, C, D, E} dari jarak sebelumnya, perbarui jarak.
 
-![image](https://github.com/user-attachments/assets/4dbf23a8-951a-4e09-a048-33902527c13e)
+![image](https://github.com/user-attachments/assets/0f40b70e-2cb2-43e0-85f6-100a1d28c090)
 
 ### Langkah 3: Pilih node dengan jarak terkecil yang belum dikunjungi (E):
 - Periksa tetangga E: B (8+1=9), C (2+1=3), D (7+1=8)
@@ -136,7 +136,7 @@ Graf ini memiliki simpul A, B, C, D, dan E, serta sisi-sisi dengan bobot yang di
 - Tandai E sebagai dikunjungi
 - Set yang belum dikunjungi: {B, C, D}
 
-![image](https://github.com/user-attachments/assets/67260b16-b807-4691-a4d4-317d1a41b465)
+![image](https://github.com/user-attachments/assets/5af711d3-0d1d-4ff4-afbf-cb67194209de)
 
 ### Langkah 4: Pilih node dengan jarak terkecil yang belum dikunjungi (C):
 - Periksa tetangga C: B (3+3=6), D (6+3=9)
@@ -144,7 +144,7 @@ Graf ini memiliki simpul A, B, C, D, dan E, serta sisi-sisi dengan bobot yang di
 - Tandai C sebagai dikunjungi
 - Set yang belum dikunjungi: {B, D}
 
-![image](https://github.com/user-attachments/assets/33d21a62-9dc5-4ca4-83de-efba1f38db02)
+![image](https://github.com/user-attachments/assets/0c8cc209-f854-4dba-a26a-8b09de3f3faf)
 
 ### Langkah 5: Pilih node dengan jarak terkecil yang belum dikunjungi (B):
 - Periksa tetangga B: D (tidak perlu diperiksa karena C dan D sudah dikunjungi)
@@ -152,14 +152,14 @@ Graf ini memiliki simpul A, B, C, D, dan E, serta sisi-sisi dengan bobot yang di
 - Tandai B sebagai dikunjungi
 - Set yang belum dikunjungi: {D}
 
-![image](https://github.com/user-attachments/assets/eda8a195-e67a-45ae-bb7c-2b69515fa7fc)
+![image](https://github.com/user-attachments/assets/a9baee5e-29b4-434a-9a0e-3e79e845719c)
 
 ### Langkah 6: Kunjungi node terakhir (D):
 - Tidak ada tetangga yang belum dikunjungi
 - Tandai D sebagai dikunjungi
 - Semua node telah dikunjungi
 
-![image](https://github.com/user-attachments/assets/b79de2f1-ff4d-4e06-a0c5-9bf1f72eb411)
+![image](https://github.com/user-attachments/assets/e9154ae1-b210-45c7-85f7-6366a55f68ce)
 
 Semoga visualisasi ini membantu Anda memahami cara kerja Dijkstra's Algorithm!
 
@@ -180,7 +180,7 @@ Kalian diminta untuk membuat program algoritma dijkstra untuk menghitung jarak t
 Contoh:
 Misalkan terdapat graph dengan bobot berikut:
 
-![image](https://github.com/user-attachments/assets/92187d25-b39e-4cf3-991e-352f77febe00)
+![image](https://github.com/user-attachments/assets/9da36034-02cb-425e-bb89-b12073fe4c73)
 
 Graph tersebut dapat direpresentasikan dalam bentuk objek sebagai berikut:
 ```js
