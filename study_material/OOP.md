@@ -1,4 +1,4 @@
-# OOP | Part 2
+# OOP
 
 Pemrograman Berorientasi Objek (OOP) adalah paradigma pemrograman yang memungkinkan Anda untuk mengorganisasi kode menjadi objek-objek yang memiliki sifat dan perilaku tertentu. Dalam JavaScript, OOP dapat diimplementasikan menggunakan konsep "class" dan "prototype".
 
