@@ -9,7 +9,7 @@ kalian akan belajar beberapa algoritma baru yang akan mempermudah kalian kedepan
 - [Searching Algorithm](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/searching-algorithm.md)
 - [Logic Nolep (Search Algo) :exploding_head: ](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/logic_nolep/ln-searhAlgo.md)
 - [Sorting Algorithm](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/sorting-algorithm.md)
-- [Logic Nolep (Sorting Algo) :exploding_head: ]()
+- [Logic Nolep (Sorting Algo) :exploding_head: ](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/logic_nolep/ln-sortingAlgo.md)
 - [Graph Algorithm](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/logic_nolep/ln-sortingAlgo.md)
 - [Dijkstra's Algorithm](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/dijkstra-algorithm.md)
 - [Logic Nolep (dijkstra) :exploding_head: ](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/logic_nolep/ln-dijkstra.md)
