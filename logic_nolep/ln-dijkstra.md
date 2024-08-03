@@ -41,7 +41,7 @@ Fungsi shortestPathDijkstraArray harus mengembalikan jarak terpendek dari simpul
 **Contoh**:
 Misalkan terdapat graph berbobot berikut:
 
-![image](https://github.com/user-attachments/assets/a93b8e04-d9b3-4b39-8224-8bafc49703a2)
+![image](https://github.com/user-attachments/assets/e4ce9e05-b1f0-4d20-909c-65ca539c7f92)
 
 Graph tersebut dapat direpresentasikan dalam bentuk array dua dimensi sebagai berikut:
 
