@@ -1,4 +1,4 @@
-# Graph Algorithm | Part 6
+![image](https://github.com/user-attachments/assets/a23d85fc-5d35-43a6-aabe-0c4326367c4f)# Graph Algorithm | Part 6
 
 Graph adalah struktur data yang terdiri dari simpul (node) dan sisi (edge) yang menghubungkan simpul-simpul tersebut. Graph digunakan untuk merepresentasikan berbagai jenis hubungan atau jaringan antara entitas. Ada dua jenis utama graph: directed (berarah) dan undirected (tak berarah).
 
@@ -60,11 +60,8 @@ Pada contoh yang telah kita buat, kita memiliki 3 simpul (A, B, dan C) dan 3 sis
 - Node C terhubung kembali ke Node A
 
 Ini adalah representasi visual dari graph yang telah kita buat:
-```js
-A --- B
- \   /
-   C
-```
+
+![image](https://github.com/user-attachments/assets/1aefa00f-fb8f-4b36-94da-3a44cc41d631)
 
 Di dalam representasi ini, setiap huruf merepresentasikan simpul, dan garis-garis (edges) merepresentasikan hubungan antara simpul-simpul tersebut. Node A terhubung ke Node B dan Node C, Node B terhubung ke Node A dan Node C, dan Node C terhubung ke Node A dan Node B.
 
@@ -213,57 +210,29 @@ console.log("Pencarian jarak terpendek menggunakan DFS:", dfsResult);
 ```
 Berikut adalah representasi visual dari graph ini:
 
-```
-A --- B
- \   /
-   C
-   |
-   D
-```
+![image](https://github.com/user-attachments/assets/ca69a5b7-de0e-4455-b944-28a2989254ac)
 
 Sekarang, mari kita lakukan beberapa operasi tambahan:
 
 1. Hapus simpul 'B':
 Setelah menghapus simpul 'B', sisi yang terhubung ke 'B' juga akan dihapus.
 
-```
-A 
- \   
-  C
-  |
-  D
-```
+![image](https://github.com/user-attachments/assets/8884759c-056d-4405-b59f-bb4edeeebb79)
 
 2. Hapus sisi antara 'C' dan 'D':
 Setelah menghapus sisi antara 'C' dan 'D', graph tetap sama hanya saja sisi tersebut hilang.
 
-```
-A
- \
-  C
-```
+![image](https://github.com/user-attachments/assets/fe70708e-3a95-412d-93ec-203e2e024806)
 
 3. Pencarian jarak terpendek menggunakan BFS dari 'A' ke 'D':
 BFS akan mengunjungi simpul secara berurutan A, B, C, D. Jarak terpendek dari 'A' ke 'D' adalah 2 sisi.
 
-```
-A --- B
- \   /
-   C
-   |
-   D
-```
+![image](https://github.com/user-attachments/assets/abec8362-fc71-475f-a2ae-a5aac83161ab)
 
 4. Pencarian jarak terpendek menggunakan DFS dari 'A' ke 'D':
 DFS mungkin mengunjungi simpul dalam urutan A, B, C, D atau A, C, D. Jarak terpendek dari 'A' ke 'D' adalah 2 sisi.
 
-```
-A --- B
- \   /
-   C
-   |
-   D
-```
+![image](https://github.com/user-attachments/assets/b6ea547e-5fb7-4dda-93bd-33b863488353)
 
 Harapannya, deskripsi visual ini membantu Anda memahami bagaimana graph dapat diubah oleh operasi-operasi tersebut dan bagaimana algoritma BFS dan DFS bekerja dalam mencari jalur di dalam graph. 
 
