@@ -137,7 +137,7 @@ Berikut adalah daftar simpul yang dibuat berdasarkan frekuensi kemunculan setiap
 
 Berdasarkan priority queue, kita bisa menggabungkan simpul-simpul dengan frekuensi terendah untuk membentuk pohon Huffman. Di bawah ini adalah visualisasi pohon Huffman yang terbentuk:
 
-![image](https://github.com/user-attachments/assets/5a30bf6c-68b5-45bb-bfe6-000ba4ad4d74)
+![image](https://github.com/user-attachments/assets/ea3bd571-c838-4692-ba2c-464a2685600d)
 
 <br/>
 
