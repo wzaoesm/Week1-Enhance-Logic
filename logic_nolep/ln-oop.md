@@ -75,7 +75,7 @@ console.log(semmiAccount)
 //       nominal: 100000,
 //       status: 'credit',
 //       date: 2025-01-28T07:13:54.802Z,
-//       note: 'transfer dari akun Semmi Verian'
+//       note: 'transfer dari akun Nadia'
 //     }
 //   ],
 //   type: 'silver'
