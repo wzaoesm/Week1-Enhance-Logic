@@ -34,29 +34,26 @@ let yudhistiraBank = new Bank('Yudhistira Bank')
 let nadia = new Person('Nadia')
 
 yudhistiraBank.register(nadia, 'platinum', 5000)
-// Expected: Saldo awal kurang dari minimum saldo yang ditentukan
-
+// Saldo awal kurang dari minimum saldo yang ditentukan
 yudhistiraBank.register(nadia, 'platinum', 54000)
-// Expected: Selamat datang ke Yudhistira Bank, Nadia. Nomor Akun anda adalah 6332937. Total saldo adalah 54000
+//Selamat datang ke Yudhistira Bank, Nadia. Nomor Akun anda adalah 6332937. Total saldo adalah 50000
 
 let nadiaAccount = nadia.bankAccount
 
 /* PASTIKAN BAHWA SALDO SELALU BERKURANG ATAU BERTAMBAH UNTUK SETIAP TRANSAKSI */
 nadiaAccount.credit(300000)
-// Expected: Anda sukses menyimpan uang ke dalam bank.
+// Anda sukses menyimpan uang ke dalam bank.
 
 nadiaAccount.credit(1000)
-// Expected: Belum memenuhi minimal uang yang dapat di setor
-
+// Belum memenuhi minimal uang yang dapat di setor
 
 nadiaAccount.debet(200000, 'Beli Keyboard')
-// Expected: Anda sukses menarik uang dari bank
+// Anda sukses menarik uang dari bank
 
-nadiaAccount.debet(480000, 'Beli Keyboard Lagi')
-// Expected: Saldo minimum anda tidak terpenuhi untuk melakukan transaksi.
-
+nadiaAccount.debet(130000, 'Beli Keyboard Lagi')
+// Saldo minimum anda tidak terpenuhi untuk melakukan transaksi.
 nadiaAccount.debet(600000, 'Bisa gak ya lebih besar dari balance ? ')
-// Expected: Saldo anda tidak cukup
+// Saldo anda tidak cukup
 
 let semmi = new Person('Semmi Verian')
 yudhistiraBank.register(semmi, 'silver', 10000000)
@@ -67,41 +64,60 @@ nadiaAccount.transfer(semmiAccount, 100000)
 nadiaAccount.transfer(semmiAccount, 1000000)
 // Anda gagal transfer ke Semmi Verian
 
+console.log(semmiAccount)
+// Silver {
+//   memberName: 'Semmi Verian',
+//   accountNumber: 3956725,
+//   minimumBalance: 10000,
+//   balance: 10100000,
+//   transactions: [
+//     Transaction {
+//       nominal: 100000,
+//       status: 'credit',
+//       date: 2025-01-28T06:56:51.919Z,
+//       note: 'transfer dari akun Semmi Verian'
+//     }
+//   ],
+//   type: 'silver'
+// }
+
 console.log(nadiaAccount)
-// Expected: 
 // Platinum {
 //   memberName: 'Nadia',
-//   accountNumber: 5622164,
+//   accountNumber: 6507671,
 //   minimumBalance: 50000,
-//   balance: 60000,
+//   balance: 54000,
 //   transactions: [
 //     Transaction {
 //       nominal: 300000,
 //       status: 'credit',
-//       date: 2024-08-03T13:21:13.818Z,
+//       date: 2025-01-28T06:56:51.917Z,
 //       note: 'nyetor'
 //     },
 //     Transaction {
+//     Transaction {
 //       nominal: 200000,
 //       status: 'debet',
-//       date: 2024-08-03T13:21:13.819Z,
+//       status: 'debet',
+//       date: 2025-01-28T06:56:51.918Z,
+//       date: 2025-01-28T06:56:51.918Z,
+//       note: 'Beli Keyboard'
 //       note: 'Beli Keyboard'
 //     },
-//     Transaction {
-//       nominal: 480000,
-//       status: 'debet',
-//       date: 2024-08-03T13:21:13.819Z,
-//       note: 'Beli Keyboard Lagi'
 //     },
 //     Transaction {
 //       nominal: 100000,
+//     Transaction {
+//       nominal: 100000,
 //       status: 'debet',
-//       date: 2024-08-03T13:21:13.820Z,
+//       nominal: 100000,
+//       status: 'debet',
+//       status: 'debet',
+//       date: 2025-01-28T06:56:51.919Z,
 //       note: 'transfer ke akun Semmi Verian'
 //     }
 //   ],
 //   type: 'platinum'
 // }
-```
 
 **Dilarang mengubah code testcase**
