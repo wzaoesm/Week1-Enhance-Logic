@@ -36,7 +36,7 @@ let nadia = new Person('Nadia')
 yudhistiraBank.register(nadia, 'platinum', 5000)
 // Expected: Saldo awal kurang dari minimum saldo yang ditentukan
 
-yudhistiraBank.register(nadia, 'platinum', 540000)
+yudhistiraBank.register(nadia, 'platinum', 54000)
 // Expected: Selamat datang ke Yudhistira Bank, Nadia. Nomor Akun anda adalah 6332937. Total saldo adalah 54000
 
 let nadiaAccount = nadia.bankAccount
