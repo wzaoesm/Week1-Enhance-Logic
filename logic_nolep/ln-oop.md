@@ -67,14 +67,14 @@ nadiaAccount.transfer(semmiAccount, 1000000)
 console.log(semmiAccount)
 // Silver {
 //   memberName: 'Semmi Verian',
-//   accountNumber: 3956725,
+//   accountNumber: 1319650,
 //   minimumBalance: 10000,
 //   balance: 10100000,
 //   transactions: [
 //     Transaction {
 //       nominal: 100000,
 //       status: 'credit',
-//       date: 2025-01-28T06:56:51.919Z,
+//       date: 2025-01-28T07:13:54.802Z,
 //       note: 'transfer dari akun Semmi Verian'
 //     }
 //   ],
@@ -84,36 +84,26 @@ console.log(semmiAccount)
 console.log(nadiaAccount)
 // Platinum {
 //   memberName: 'Nadia',
-//   accountNumber: 6507671,
+//   accountNumber: 3971487,
 //   minimumBalance: 50000,
 //   balance: 54000,
 //   transactions: [
 //     Transaction {
 //       nominal: 300000,
 //       status: 'credit',
-//       date: 2025-01-28T06:56:51.917Z,
+//       date: 2025-01-28T07:13:54.800Z,
 //       note: 'nyetor'
 //     },
 //     Transaction {
-//     Transaction {
 //       nominal: 200000,
 //       status: 'debet',
-//       status: 'debet',
-//       date: 2025-01-28T06:56:51.918Z,
-//       date: 2025-01-28T06:56:51.918Z,
+//       date: 2025-01-28T07:13:54.801Z,
 //       note: 'Beli Keyboard'
-//       note: 'Beli Keyboard'
-//     },
 //     },
 //     Transaction {
 //       nominal: 100000,
-//     Transaction {
-//       nominal: 100000,
 //       status: 'debet',
-//       nominal: 100000,
-//       status: 'debet',
-//       status: 'debet',
-//       date: 2025-01-28T06:56:51.919Z,
+//       date: 2025-01-28T07:13:54.802Z,
 //       note: 'transfer ke akun Semmi Verian'
 //     }
 //   ],
