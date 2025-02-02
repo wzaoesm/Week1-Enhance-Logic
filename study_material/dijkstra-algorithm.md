@@ -139,7 +139,7 @@ Graf ini memiliki simpul A, B, C, D, dan E, serta sisi-sisi dengan bobot yang di
 ![image](https://github.com/user-attachments/assets/5af711d3-0d1d-4ff4-afbf-cb67194209de)
 
 ### Langkah 4: Pilih node dengan jarak terkecil yang belum dikunjungi (C):
-- Periksa tetangga C: B (3+3=6), D (6+3=9)
+- Periksa tetangga C: B (1+2+3=6), D (1+2+6=9)
 - Perbarui jarak: B = 6 (baru), D tetap 8
 - Tandai C sebagai dikunjungi
 - Set yang belum dikunjungi: {B, D}
