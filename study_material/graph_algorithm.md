@@ -65,9 +65,9 @@ Ini adalah representasi visual dari graph yang telah kita buat:
 
 Di dalam representasi ini, setiap huruf merepresentasikan simpul, dan garis-garis (edges) merepresentasikan hubungan antara simpul-simpul tersebut. Node A terhubung ke Node B dan Node C, Node B terhubung ke Node A dan Node C, dan Node C terhubung ke Node A dan Node B.
 
-Jika Anda ingin melihat visualisasi grafik secara interaktif, Anda bisa menggunakan pustaka JavaScript seperti D3.js atau pustaka visualisasi grafik lainnya. Anda bisa menggambar simpul dan sisi menggunakan elemen HTML (misalnya, div atau svg) berdasarkan data yang Anda miliki.
+Jika Kalian ingin melihat visualisasi grafik secara interaktif, Kalian bisa menggunakan pustaka JavaScript seperti D3.js atau pustaka visualisasi grafik lainnya. Kalian bisa menggambar simpul dan sisi menggunakan elemen HTML (misalnya, div atau svg) berdasarkan data yang Kalian miliki.
 
-Tentu saja, struktur graph ini masih sangat sederhana. Dalam implementasi nyata, Anda mungkin perlu menambahkan berbagai fitur seperti penghapusan simpul atau sisi, pencarian jarak terpendek, dan banyak lagi, tergantung pada kebutuhan Anda.
+Tentu saja, struktur graph ini masih sangat sederhana. Dalam implementasi nyata, Kalian mungkin perlu menambahkan berbagai fitur seperti penghapusan simpul atau sisi, pencarian jarak terpendek, dan banyak lagi, tergantung pada kebutuhan Kalian.
 
 Selain itu, ada juga pustaka JavaScript yang sudah ada, seperti NetworkX.js, yang menyediakan fungsionalitas yang lebih canggih dan siap pakai untuk bekerja dengan graph.
 
@@ -234,7 +234,7 @@ DFS mungkin mengunjungi simpul dalam urutan A, B, C, D atau A, C, D. Jarak terpe
 
 ![image](https://github.com/user-attachments/assets/b6ea547e-5fb7-4dda-93bd-33b863488353)
 
-Harapannya, deskripsi visual ini membantu Anda memahami bagaimana graph dapat diubah oleh operasi-operasi tersebut dan bagaimana algoritma BFS dan DFS bekerja dalam mencari jalur di dalam graph. 
+Harapannya, deskripsi visual ini membantu Kalian memahami bagaimana graph dapat diubah oleh operasi-operasi tersebut dan bagaimana algoritma BFS dan DFS bekerja dalam mencari jalur di dalam graph. 
 
 
 #
@@ -254,7 +254,7 @@ class Graph {
     const visited = new Set(); // Set untuk melacak simpul yang telah dikunjungi
     const queue = []; // Antrian untuk menjaga simpul yang akan diperiksa
 
-    // Menambahkan simpul awal ke antrian dan tanda sebagai sudah dikunjungi
+    // Menambahkan simpul awal ke antrian dan tKalian sebagai sudah dikunjungi
     queue.push(this.nodes.get(startValue));
     visited.add(startValue);
 
@@ -266,7 +266,7 @@ class Graph {
       for (const neighbor of currentNode.edges) {
         if (!visited.has(neighbor.value)) {
           queue.push(neighbor); // Tambahkan tetangga yang belum dikunjungi ke antrian
-          visited.add(neighbor.value); // Tandai tetangga sebagai sudah dikunjungi
+          visited.add(neighbor.value); // TKaliani tetangga sebagai sudah dikunjungi
         }
       }
     }
@@ -284,7 +284,7 @@ Kompleksitas Waktu:
 
 Keuntungan dari BFS adalah:
 - BFS menemukan jalur terpendek antara dua simpul jika graph memiliki bobot yang sama pada setiap sisi.
-- Jika Anda ingin menemukan jalur terpendek dalam jumlah langkah, maka BFS biasanya merupakan pilihan yang baik.
+- Jika Kalian ingin menemukan jalur terpendek dalam jumlah langkah, maka BFS biasanya merupakan pilihan yang baik.
 - Digunakan dalam pencarian yang melibatkan grafik yang cukup besar, tetapi memiliki kedalaman yang terbatas.
 
 
@@ -299,7 +299,7 @@ class Graph {
   dfs(startValue, targetValue, visited = new Set()) {
     if (visited.has(startValue)) return false; // Jika simpul sudah dikunjungi, kembalikan false
 
-    visited.add(startValue); // Tandai simpul sebagai sudah dikunjungi
+    visited.add(startValue); // TKaliani simpul sebagai sudah dikunjungi
     if (startValue === targetValue) return true; // Jika target ditemukan, kembalikan true
 
     const startNode = this.nodes.get(startValue);
@@ -325,16 +325,16 @@ Keuntungan dari DFS adalah:
 - DFS umumnya digunakan dalam mencari jalur yang lebih panjang atau dalam solusi optimasi ketika mencari solusi terbaik bukan prioritas utama.
 
 
-Namun, DFS dapat tersesat dalam grafik yang sangat dalam atau berlubang tanpa solusi. Oleh karena itu, jika Anda ingin mencari jalur terpendek, DFS mungkin tidak akan bekerja dengan baik, terutama dalam grafik yang berbentuk pohon yang dalam.
+Namun, DFS dapat tersesat dalam grafik yang sangat dalam atau berlubang tanpa solusi. Oleh karena itu, jika Kalian ingin mencari jalur terpendek, DFS mungkin tidak akan bekerja dengan baik, terutama dalam grafik yang berbentuk pohon yang dalam.
 
-Pastikan untuk memahami kode dan komentar ini dengan seksama. Anda dapat menjalankan kode ini dan menguji algoritma BFS dan DFS pada contoh graph yang telah Anda definisikan sebelumnya. Kedua algoritma ini memiliki kegunaan yang berbeda tergantung pada skenario penggunaan dan tujuan pencarian Anda.
+Pastikan untuk memahami kode dan komentar ini dengan seksama. Kalian dapat menjalankan kode ini dan menguji algoritma BFS dan DFS pada contoh graph yang telah Kalian definisikan sebelumnya. Kedua algoritma ini memiliki kegunaan yang berbeda tergantung pada skenario penggunaan dan tujuan pencarian Kalian.
 
 Kapan Menggunakan BFS dan DFS:
-- Gunakan BFS jika Anda ingin mencari jalur terpendek antara dua simpul, terutama jika semua sisi memiliki bobot yang sama.
-- Gunakan DFS jika Anda ingin menjelajahi cabang secara lebih dalam terlebih dahulu, atau dalam skenario di mana Anda mencari solusi optimasi.
-- Jika Anda tidak yakin antara BFS dan DFS, atau jika Anda perlu menjelajahi seluruh grafik tanpa memperhatikan urutan, Anda juga bisa menggunakan BFS atau DFS sesuai kebutuhan.
+- Gunakan BFS jika Kalian ingin mencari jalur terpendek antara dua simpul, terutama jika semua sisi memiliki bobot yang sama.
+- Gunakan DFS jika Kalian ingin menjelajahi cabang secara lebih dalam terlebih dahulu, atau dalam skenario di mana Kalian mencari solusi optimasi.
+- Jika Kalian tidak yakin antara BFS dan DFS, atau jika Kalian perlu menjelajahi seluruh grafik tanpa memperhatikan urutan, Kalian juga bisa menggunakan BFS atau DFS sesuai kebutuhan.
 
-Pilihan antara BFS dan DFS tergantung pada struktur grafik Anda, tujuan pencarian Anda, dan bagaimana Anda ingin menjelajah grafik tersebut.
+Pilihan antara BFS dan DFS tergantung pada struktur grafik Kalian, tujuan pencarian Kalian, dan bagaimana Kalian ingin menjelajah grafik tersebut.
 
 # Source Tambahan Queue Data Structure
 Ada baiknya kita juga belajar queue data structure sebelum implementasi graph. karena queue dibutuhkan di 2 algoritma ini.
@@ -342,7 +342,7 @@ https://www.geeksforgeeks.org/queue-data-structure/
 
 Queue adalah struktur data yang mengikuti konsep FIFO (First-In-First-Out), yang berarti elemen pertama yang dimasukkan ke dalam queue akan menjadi yang pertama dikeluarkan. Queue mirip dengan antrian dalam kehidupan sehari-hari, seperti antrian di toko atau di tempat pembayaran.
 
-Dalam JavaScript, Anda dapat mengimplementasikan queue menggunakan array biasa. Anda dapat menambahkan elemen baru ke bagian akhir array menggunakan metode push(), dan menghapus elemen dari bagian depan array menggunakan metode shift(). Namun, untuk implementasi yang lebih efisien, terutama dalam kasus dengan jumlah elemen yang besar, Anda bisa menggunakan LinkedList.
+Dalam JavaScript, Kalian dapat mengimplementasikan queue menggunakan array biasa. Kalian dapat menambahkan elemen baru ke bagian akhir array menggunakan metode push(), dan menghapus elemen dari bagian depan array menggunakan metode shift(). Namun, untuk implementasi yang lebih efisien, terutama dalam kasus dengan jumlah elemen yang besar, Kalian bisa menggunakan LinkedList.
 
 Contoh implementasi queue dalam JavaScript:
 
