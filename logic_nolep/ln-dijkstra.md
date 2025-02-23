@@ -129,7 +129,7 @@ function solveQuestions() {
     console.log('3. Jalur terpendek Bandung ke Makassar:', path.join(' -> '), 'dengan jarak', distances['MKS'], 'km');
     // Expected return: Jalur terpendek Bandung ke Makassar: BDG -> YOG -> SBY -> MKS dengan jarak 1600 km
 
-    // TESTCASE 4. Menambahkan jalan baru Jakarta ke Yogyakarta dengan jarak 500KM
+    // TESTCASE 4. Menambahkan jalan baru Jakarta ke Yogyakarta dengan jarak 450KM
     graph['JKT']['YOG'] = 450;
     graph['YOG']['JKT'] = 450;
     ({ distances, previous } = dijkstra(graph, 'JKT', 'SBY'));
