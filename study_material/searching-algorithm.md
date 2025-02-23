@@ -6,6 +6,7 @@ Ada beberapa jenis algoritma pencarian yang umum digunakan, di antaranya:
 
 ## 1. Pencarian Linear (Sequential Search):
 ![image](https://github.com/user-attachments/assets/b7812964-8bb8-4129-8d68-9b8a0f81fab5)
+
 Algoritma ini melakukan pencarian dengan cara mengunjungi setiap elemen dalam himpunan data satu per satu hingga elemen yang dicari ditemukan. Ini adalah pendekatan yang sederhana, tetapi kurang efisien untuk himpunan data besar karena memerlukan waktu linear dalam hal jumlah elemen.
 
 algoritma ini sering kalian pakai di phase 0 secara tidak sadar. dan biasanya kalian menggukana double for loop untuk mencari sesuatu.
@@ -26,6 +27,7 @@ function linearSearch(arr, target) {
 
 ## 2. Pencarian Binary (Binary Search) :
 ![image](https://github.com/user-attachments/assets/04608fd5-2a45-4c12-bdb4-4997e30c8905)
+
 Algoritma ini hanya dapat digunakan pada himpunan data yang sudah terurut. Pencarian dimulai dengan membandingkan elemen tengah himpunan data dengan elemen yang dicari. Berdasarkan hasil perbandingan, setengah himpunan data yang tidak mungkin mengandung elemen yang dicari dapat diabaikan. Hal ini menghasilkan waktu pencarian yang lebih cepat dibandingkan dengan pencarian linear. Binary search hanya memerlukan waktu logaritmik dalam hal jumlah elemen.
 
 (Catatan: Binary search hanya berlaku pada himpunan data terurut)
