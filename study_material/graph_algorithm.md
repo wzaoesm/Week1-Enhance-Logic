@@ -1,5 +1,7 @@
 # Graph Algorithm
 
+![image](https://github.com/user-attachments/assets/217a6419-7bf2-4f55-b441-0741f32a748a)
+
 Graph adalah struktur data yang terdiri dari simpul (node) dan sisi (edge) yang menghubungkan simpul-simpul tersebut. Graph digunakan untuk merepresentasikan berbagai jenis hubungan atau jaringan antara entitas. Ada dua jenis utama graph: directed (berarah) dan undirected (tak berarah).
 
 Mari kita mulai dengan membuat representasi sederhana untuk graph menggunakan JavaScript. Pertama, mari kita buat struktur dasar untuk simpul (node):
