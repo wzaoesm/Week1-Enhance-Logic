@@ -188,9 +188,9 @@ Huffman Coding Algorithm memiliki beberapa manfaat dan kegunaan yang membuatnya 
 5. Penyimpanan Multimedia: Huffman Coding sering digunakan dalam kompresi file multimedia seperti gambar, audio, dan video. Hal ini memungkinkan penyimpanan dan pengiriman konten multimedia dengan lebih efisien tanpa mengorbankan kualitas yang signifikan.
 
 Kapan Harus Menggunakan Huffman Coding Algorithm:
-- Ketika Anda perlu mengompresi atau menyimpan data dengan lebih efisien, terutama jika ada repetisi dan pola dalam data.
-- Ketika Anda ingin mengurangi penggunaan ruang penyimpanan dalam penyimpanan file atau dalam pengiriman data melalui jaringan.
-- Ketika Anda bekerja dengan data yang memiliki distribusi frekuensi yang tidak merata, seperti teks atau data multimedia.
+- Ketika Kalian perlu mengompresi atau menyimpan data dengan lebih efisien, terutama jika ada repetisi dan pola dalam data.
+- Ketika Kalian ingin mengurangi penggunaan ruang penyimpanan dalam penyimpanan file atau dalam pengiriman data melalui jaringan.
+- Ketika Kalian bekerja dengan data yang memiliki distribusi frekuensi yang tidak merata, seperti teks atau data multimedia.
 - Huffman Coding sangat berguna dalam aplikasi seperti kompresi file, penyimpanan data dalam basis data, kompresi video dan audio, serta mengurangi overhead jaringan dalam pengiriman data.
 
 Namun, penting untuk diingat bahwa Huffman Coding lebih cocok untuk data dengan distribusi frekuensi yang tidak merata. Dalam beberapa kasus, jika distribusi frekuensi relatif merata, algoritma kompresi lain seperti Run-Length Encoding atau algoritma Lempel-Ziv mungkin lebih efektif. 
