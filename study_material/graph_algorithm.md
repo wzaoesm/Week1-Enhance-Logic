@@ -337,6 +337,9 @@ Kapan Menggunakan BFS dan DFS:
 Pilihan antara BFS dan DFS tergantung pada struktur grafik Kalian, tujuan pencarian Kalian, dan bagaimana Kalian ingin menjelajah grafik tersebut.
 
 # Source Tambahan Queue Data Structure
+
+![image](https://github.com/user-attachments/assets/33bef653-5452-4326-b86b-f4ad17426b55)
+
 Ada baiknya kita juga belajar queue data structure sebelum implementasi graph. karena queue dibutuhkan di 2 algoritma ini.
 https://www.geeksforgeeks.org/queue-data-structure/
 
