@@ -247,3 +247,23 @@ console.log(account.balance); // Output: 1300
 Dalam contoh ini, properti _balance dienkapsulasi dan hanya dapat diakses melalui metode balance, deposit, dan withdraw.
 
 Inilah beberapa sifat utama dalam Pemrograman Berorientasi Objek. Masing-masing sifat ini membantu Kalian membangun kode yang lebih terorganisir, fleksibel, dan mudah diatur.
+
+
+## Mengapa Harus Belajar Paradigma Pemrograman dan OOP ?
+
+1. Paradigma Pemrograman membantu programmer:
+- Mengerti berbagai cara penyelesaian masalah dalam coding 
+- Lebih mudah beradaptasi dengan teknologi dan framework baru
+- Bisa memilih pendekatan terbaik sesuai kebutuhan proyek
+
+2. Khusus untuk OOP:
+- Merupakan standar yang paling banyak digunakan di industri
+- Memudahkan pengerjaan proyek besar karena kode lebih terstruktur
+- Dibutuhkan untuk bekerja dengan framework/library modern
+
+3. Dampak ke Karir:
+- Lebih banyak peluang kerja karena skillset yang lebih lengkap
+- Nilai jual sebagai programmer meningkat
+- Lebih mudah berkembang ke posisi senior/tech lead
+
+Intinya, memahami paradigma pemrograman terutama OOP adalah investasi penting untuk karir jangka panjang sebagai programmer. Skill ini membuka lebih banyak peluang dan memudahkan adaptasi dengan perkembangan teknologi.
