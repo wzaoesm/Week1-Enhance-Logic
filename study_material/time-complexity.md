@@ -94,3 +94,22 @@ function bubbleSort(array) {
 
 ![image](https://github.com/user-attachments/assets/eb2944ae-6dd0-4043-a3fd-fab67fb5ecc0)
 
+
+## Kenapa kita wajib tau Time Complexity ?
+
+1. Dampak Langsung ke Performa Aplikasi:
+- Aplikasi yang lambat = pengguna tidak puas
+- Biaya server/computing yang lebih tinggi
+- Masalah skalabilitas saat data/pengguna bertambah
+
+2. Nilai Professional:
+- Kemampuan membuat kode yang efisien adalah skill wajib untuk level senior
+- Sering muncul dalam technical interview di perusahaan teknologi
+- Menunjukkan pemahaman mendalam tentang fundamental programming
+
+3. Pengambilan Keputusan:
+- Membantu memilih algoritma/struktur data yang tepat
+- Bisa memperkirakan dampak performa dari solusi yang dibuat
+- Lebih mudah mengoptimasi kode yang bermasalah
+
+Intinya, pemahaman Time Complexity membedakan programmer biasa dengan programmer yang berkualitas. Skill ini sangat penting untuk membuat aplikasi yang scalable dan mendapatkan peluang karir yang lebih baik, terutama di perusahaan teknologi besar.
