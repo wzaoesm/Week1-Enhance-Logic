@@ -1,6 +1,5 @@
 # week1-Enhance-Logic
-Dalam 1 minggu ini kalian akan mengulas lagi **logic** kalian untuk terakhir kalinya, tetapi ini akan sedikit berbeda dari sebelumnya
-kalian akan belajar beberapa algoritma baru yang akan mempermudah kalian kedepanya
+Sekarang kalian berada di week 1 phase 1, dimana di week ini terakhirnya kalinya kalian bertemu dengan logic, karena next week dan seterusnya tugas tugas kalian bukan lagi cuman tentang soal algoritma dan jawaban di console.log. Di week 1 ini kalian akan belajar tentang paradigma programming lain yaitu (OOP) dan algoritma algoritma next level yang bakal berguna di interview kerja nanti. kalian juga bakal belajar data struktur baru seperti graph dan queue. Belajar lebih tentang terminal, cara membuat parameter dan animasi di terminal. 
 
 ## Week 1 Enhance Logic (Berurutan) 
 - [OOP](https://github.com/RPN-Phase-1/Week1-Enhance-Logic/blob/main/study_material/OOP.md)
