@@ -90,22 +90,22 @@ console.log('Huffman table:', table);
 ## Berikut ini adalah contoh visualisasi langkah-langkah Huffman Coding Algorithm dengan data berikut: "huffmanalgorithm_example"
 
 1. Hitung Frekuensi Kemunculan Setiap Simbol
-- h: 3 kali
-- u: 2 kali
-- f: 2 kali
-- m: 1 kali
 - a: 3 kali
-- n: 1 kali
-- a: 1 kali
-- l: 1 kali
-- g: 1 kali
-- o: 2 kali
-- r: 2 kali
-- i : 1 kali
-- t : 1 kali
 - e: 2 kali
-- x: 1 kali
+- f: 2 kali
+- h: 2 kali
+- m: 3 kali
+- g: 1 kali
+- i: 1 kali
+- l: 1 kali
+- n: 1 kali
+- o: 1 kali
 - p: 1 kali
+- r: 1 kali
+- t: 1 kali
+- u: 1 kali
+- x: 1 kali
+- _: 1 kali
 
 <br/>
 
@@ -113,22 +113,22 @@ console.log('Huffman table:', table);
 
 Berikut adalah daftar simpul yang dibuat berdasarkan frekuensi kemunculan setiap simbol:
 
-- Simbol 'n', Frekuensi 1
-- Simbol 'm', Frekuensi 1
-- Simbol '_', Frekuensi 1
-- Simbol 'l', Frekuensi 1
 - Simbol 'g', Frekuensi 1
 - Simbol 'i', Frekuensi 1
-- Simbol 't', Frekuensi 1
-- Simbol 'x', Frekuensi 1
+- Simbol 'l', Frekuensi 1
+- Simbol 'n', Frekuensi 1
+- Simbol 'o', Frekuensi 1
 - Simbol 'p', Frekuensi 1
-- Simbol 'u', Frekuensi 2
-- Simbol 'f', Frekuensi 2
-- Simbol 'o', Frekuensi 2
-- Simbol 'r', Frekuensi 2
+- Simbol 'r', Frekuensi 1
+- Simbol 't', Frekuensi 1
+- Simbol 'u', Frekuensi 1
+- Simbol 'x', Frekuensi 1
+- Simbol '_', Frekuensi 1
 - Simbol 'e', Frekuensi 2
+- Simbol 'f', Frekuensi 2
+- Simbol 'h', Frekuensi 2
 - Simbol 'a', Frekuensi 3
-- Simbol 'h', Frekuensi 3
+- Simbol 'm', Frekuensi 3
 
 
 <br/>
@@ -142,33 +142,34 @@ Berdasarkan priority queue, kita bisa menggabungkan simpul-simpul dengan frekuen
 <br/>
 
 4. Buat Tabel Kode Huffman
-Kita akan menggabungkan simbol-simbol pada setiap cabang dalam pohon Huffman untuk membuat tabel kode Huffman. Simbol-simbol yang terletak pada cabang kiri akan memiliki kode biner '0', sementara yang terletak pada cabang kanan akan memiliki kode biner '1'. Berikut adalah tabel kode Huffman berdasarkan pohon Huffman di atas:
+Setelah pohon Huffman terbentuk, kita dapat membuat tabel kode Huffman dengan melakukan traversal pada pohon. Simpul-simpul yang terletak pada cabang kiri akan memiliki kode biner '0', sementara yang terletak pada cabang kanan akan memiliki kode biner '1'.
 
-- n: 00000
-- m: 00001
-- _: 00010
-- l: 00011
-- g: 00100
-- i: 00101
-- t: 00110
-- x: 00111
-- p: 01000
-- u: 01001
-- f: 01010
-- o: 01011
-- r: 01100
-- e: 01101
-- a: 01110
-- h: 01111
+Dengan mengikuti algoritma pembuatan kode Huffman berdasarkan pohon yang telah kita bangun, kita bisa mendapatkan kode unik untuk setiap karakter. Berikut adalah contoh kode Huffman yang mungkin dihasilkan:
+
+- a: 00 (frekuensi: 3)
+- m: 01 (frekuensi: 3)
+- e: 100 (frekuensi: 2)
+- f: 101 (frekuensi: 2)
+- h: 110 (frekuensi: 2)
+- g: 11100 (frekuensi: 1)
+- i: 11101 (frekuensi: 1)
+- l: 11110 (frekuensi: 1)
+- n: 111110 (frekuensi: 1)
+- o: 111111 (frekuensi: 1)
+- p: 1000000 (frekuensi: 1)
+- r: 1000001 (frekuensi: 1)
+- t: 1000010 (frekuensi: 1)
+- u: 1000011 (frekuensi: 1)
+- x: 1000100 (frekuensi: 1)
+- _: 1000101 (frekuensi: 1)
+
+Perhatikan bahwa karakter dengan frekuensi lebih tinggi ('a' dan 'm' dengan 3 kemunculan) mendapatkan kode yang lebih pendek (2 bit), sedangkan karakter dengan frekuensi lebih rendah mendapatkan kode yang lebih panjang. Ini adalah inti dari kompresi Huffman - membuat representasi yang lebih efisien dengan memberikan kode yang lebih pendek untuk simbol yang lebih sering muncul.
 
 <br/>
 
 5. Kodekan Data dengan Tabel Kode Huffman
 
-Kodekan setiap simbol dalam data dengan menggunakan tabel kode Huffman. Data awal adalah "huffman_algorithm_example". Berikut adalah kode biner yang dihasilkan setelah mengkodekan data dengan tabel Huffman:
-
-Encoded data: `"011110011101110011100101110110000100000110010010111101100001100011100101010001101011101011110100001111000110100010011101101000110100011100101100001001100100110100011101010010101110001010101111011111110001101001000101110100100110011101000001"`
-
+Menggunakan tabel kode Huffman yang telah dibuat, kita dapat mengkodekan data asli "huffmanalgorithm_example" dengan menggantikan setiap simbol dengan kode binernya.
 
 
 #### Harap diingat bahwa contoh visualisasi di atas hanya merupakan ilustrasi sederhana dari langkah-langkah dalam Huffman Coding Algorithm. Implementasi sebenarnya akan lebih rumit dan melibatkan lebih banyak kode.
@@ -194,3 +195,11 @@ Kapan Harus Menggunakan Huffman Coding Algorithm:
 - Huffman Coding sangat berguna dalam aplikasi seperti kompresi file, penyimpanan data dalam basis data, kompresi video dan audio, serta mengurangi overhead jaringan dalam pengiriman data.
 
 Namun, penting untuk diingat bahwa Huffman Coding lebih cocok untuk data dengan distribusi frekuensi yang tidak merata. Dalam beberapa kasus, jika distribusi frekuensi relatif merata, algoritma kompresi lain seperti Run-Length Encoding atau algoritma Lempel-Ziv mungkin lebih efektif. 
+
+
+
+
+
+
+
+
