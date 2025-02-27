@@ -89,7 +89,8 @@ console.log('Huffman table:', table);
 
 ## Berikut ini adalah contoh visualisasi langkah-langkah Huffman Coding Algorithm dengan data berikut: "huffmanalgorithm_example"
 
-1. Hitung Frekuensi Kemunculan Setiap Simbol
+### 1. Hitung Frekuensi Kemunculan Setiap Simbol
+
 - a: 3 kali
 - e: 2 kali
 - f: 2 kali
@@ -109,7 +110,7 @@ console.log('Huffman table:', table);
 
 <br/>
 
-2. Buat Simpul-simpul dan Priority Queue (Heap)
+### 2. Buat Simpul-simpul dan Priority Queue (Heap)
 
 Berikut adalah daftar simpul yang dibuat berdasarkan frekuensi kemunculan setiap simbol:
 
@@ -133,7 +134,7 @@ Berikut adalah daftar simpul yang dibuat berdasarkan frekuensi kemunculan setiap
 
 <br/>
 
-3. Bangun Pohon Huffman
+### 3. Bangun Pohon Huffman
 
 Berdasarkan priority queue, kita bisa menggabungkan simpul-simpul dengan frekuensi terendah untuk membentuk pohon Huffman. Di bawah ini adalah visualisasi pohon Huffman yang terbentuk:
 
@@ -141,7 +142,8 @@ Berdasarkan priority queue, kita bisa menggabungkan simpul-simpul dengan frekuen
 
 <br/>
 
-4. Buat Tabel Kode Huffman
+### 4. Buat Tabel Kode Huffman
+
 Setelah pohon Huffman terbentuk, kita dapat membuat tabel kode Huffman dengan melakukan traversal pada pohon. Simpul-simpul yang terletak pada cabang kiri akan memiliki kode biner '0', sementara yang terletak pada cabang kanan akan memiliki kode biner '1'.
 
 Dengan mengikuti algoritma pembuatan kode Huffman berdasarkan pohon yang telah kita bangun, kita bisa mendapatkan kode unik untuk setiap karakter. Berikut adalah contoh kode Huffman yang mungkin dihasilkan:
@@ -167,7 +169,7 @@ Perhatikan bahwa karakter dengan frekuensi lebih tinggi ('a' dan 'm' dengan 3 ke
 
 <br/>
 
-5. Kodekan Data dengan Tabel Kode Huffman
+### 5. Kodekan Data dengan Tabel Kode Huffman
 
 Menggunakan tabel kode Huffman yang telah dibuat, kita dapat mengkodekan data asli "huffmanalgorithm_example" dengan menggantikan setiap simbol dengan kode binernya.
 
