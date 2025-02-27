@@ -1,5 +1,7 @@
 # Huffman Coding Algorithm
 
+![image](https://github.com/user-attachments/assets/6ccdd7c1-9ea5-405d-9cd2-01e5631ff471)
+
 Huffman Coding Algorithm adalah metode kompresi data yang digunakan untuk mengurangi ukuran data dengan cara memberikan kode biner yang lebih pendek kepada simbol-simbol atau karakter-karakter yang lebih sering muncul dalam data. Algoritma ini merupakan salah satu metode kompresi lossless, yang artinya data yang dikompresi akan dapat dikembalikan ke bentuk aslinya tanpa kehilangan informasi.
 
 Cara Kerja Huffman Coding Algorithm:
@@ -167,8 +169,6 @@ Dengan mengikuti algoritma pembuatan kode Huffman berdasarkan pohon yang telah k
 
 Perhatikan bahwa karakter dengan frekuensi lebih tinggi ('a' dan 'm' dengan 3 kemunculan) mendapatkan kode yang lebih pendek (2 bit), sedangkan karakter dengan frekuensi lebih rendah mendapatkan kode yang lebih panjang. Ini adalah inti dari kompresi Huffman - membuat representasi yang lebih efisien dengan memberikan kode yang lebih pendek untuk simbol yang lebih sering muncul.
 
-<br/>
-
 ### 5. Kodekan Data dengan Tabel Kode Huffman
 
 Menggunakan tabel kode Huffman yang telah dibuat, kita dapat mengkodekan data asli "huffmanalgorithm_example" dengan menggantikan setiap simbol dengan kode binernya.
@@ -199,7 +199,422 @@ Kapan Harus Menggunakan Huffman Coding Algorithm:
 Namun, penting untuk diingat bahwa Huffman Coding lebih cocok untuk data dengan distribusi frekuensi yang tidak merata. Dalam beberapa kasus, jika distribusi frekuensi relatif merata, algoritma kompresi lain seperti Run-Length Encoding atau algoritma Lempel-Ziv mungkin lebih efektif. 
 
 
+# Implementasi Huffman Coding Algorithm Pada Backend
 
+![image](https://github.com/user-attachments/assets/1f5df5cb-32c9-43b7-a439-577034a66527)
+
+
+Algoritma Huffman sering digunakan dalam berbagai aplikasi backend untuk mengoptimalkan penggunaan ruang penyimpanan dan bandwidth. Berikut adalah beberapa kasus penggunaan nyata dan implementasinya.
+
+## Kasus Penggunaan Nyata pada Backend
+
+### 1. Kompresi Data untuk Database Logging
+
+Backend sistem sering kali harus menyimpan dan mengelola volume log yang besar. Algoritma Huffman dapat digunakan untuk mengompresi data log sebelum disimpan, menghemat ruang penyimpanan dan meningkatkan kinerja query.
+
+### 2. Optimasi Bandwidth API
+
+API yang mengembalikan dataset besar dapat menggunakan kompresi Huffman untuk mengurangi ukuran payload, terutama untuk koneksi dengan bandwidth rendah atau aplikasi mobile.
+
+### 3. Caching Data Terkompresi
+
+Backend yang menggunakan sistem caching (Redis, Memcached) dapat mengompresi data sebelum menyimpannya di cache, memungkinkan penyimpanan lebih banyak data dalam memori terbatas.
+
+### 4. File Storage Systems
+
+Sistem penyimpanan file dapat mengimplementasikan Huffman coding untuk mengompresi file dengan format data yang tidak memiliki kompresi bawaan.
+
+### 5. Real-time Message Compression
+
+Sistem pesan real-time dan chat dapat menggunakan Huffman untuk mengompresi pesan, mengurangi latensi dan penggunaan bandwidth.
+
+## Implementasi Node.js untuk Kompresi API Payload
+
+Berikut adalah contoh implementasi kompresi Huffman dalam aplikasi backend Node.js yang digunakan untuk mengompresi respons API:
+
+```javascript
+const express = require('express');
+const app = express();
+
+// Implementasi Huffman Coding
+class HuffmanNode {
+  constructor(char, freq) {
+    this.char = char;
+    this.freq = freq;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class HuffmanCompression {
+  constructor() {
+    this.encodingMap = {};
+    this.decodingMap = {};
+  }
+
+  // Menghitung frekuensi karakter
+  calculateFrequency(data) {
+    const frequency = {};
+    for (const char of data) {
+      if (!frequency[char]) {
+        frequency[char] = 0;
+      }
+      frequency[char]++;
+    }
+    return frequency;
+  }
+
+  // Membuat pohon Huffman
+  buildHuffmanTree(frequency) {
+    const priorityQueue = [];
+    
+    // Membuat node untuk setiap karakter
+    for (const char in frequency) {
+      priorityQueue.push(new HuffmanNode(char, frequency[char]));
+    }
+    
+    // Membuat pohon dengan menggabungkan node-node frekuensi terendah
+    while (priorityQueue.length > 1) {
+      // Urutkan berdasarkan frekuensi
+      priorityQueue.sort((a, b) => a.freq - b.freq);
+      
+      // Ambil dua node dengan frekuensi terendah
+      const left = priorityQueue.shift();
+      const right = priorityQueue.shift();
+      
+      // Buat node baru dengan frekuensi gabungan
+      const newNode = new HuffmanNode(null, left.freq + right.freq);
+      newNode.left = left;
+      newNode.right = right;
+      
+      // Masukkan kembali ke dalam queue
+      priorityQueue.push(newNode);
+    }
+    
+    return priorityQueue[0]; // Root node
+  }
+
+  // Membuat tabel encoding (karakter ke kode)
+  buildEncodingTable(node, prefix = '', table = {}) {
+    if (node) {
+      if (node.char !== null) {
+        table[node.char] = prefix || '0'; // Kasus khusus untuk satu karakter
+      }
+      
+      this.buildEncodingTable(node.left, prefix + '0', table);
+      this.buildEncodingTable(node.right, prefix + '1', table);
+    }
+    
+    return table;
+  }
+
+  // Membuat tabel decoding (kode ke karakter)
+  buildDecodingTable(encodingTable) {
+    const decodingTable = {};
+    for (const char in encodingTable) {
+      decodingTable[encodingTable[char]] = char;
+    }
+    return decodingTable;
+  }
+
+  // Mengompresi data
+  compress(data) {
+    if (!data || data.length === 0) {
+      return { compressedData: '', tree: null };
+    }
+    
+    // Menghitung frekuensi
+    const frequency = this.calculateFrequency(data);
+    
+    // Membangun pohon Huffman
+    const tree = this.buildHuffmanTree(frequency);
+    
+    // Membuat tabel encoding
+    this.encodingMap = this.buildEncodingTable(tree);
+    
+    // Mengompresi data
+    let compressedData = '';
+    for (const char of data) {
+      compressedData += this.encodingMap[char];
+    }
+    
+    // Membuat tabel decoding untuk dekompresi nanti
+    this.decodingMap = this.buildDecodingTable(this.encodingMap);
+    
+    return {
+      compressedData,
+      tree,
+      encodingMap: this.encodingMap,
+      decodingMap: this.decodingMap
+    };
+  }
+
+  // Mendekompresi data
+  decompress(compressedData, decodingMap) {
+    if (!compressedData) return '';
+    
+    let current = '';
+    let decompressedData = '';
+    
+    for (const bit of compressedData) {
+      current += bit;
+      
+      if (decodingMap[current]) {
+        decompressedData += decodingMap[current];
+        current = '';
+      }
+    }
+    
+    return decompressedData;
+  }
+
+  // Menghitung rasio kompresi
+  calculateCompressionRatio(originalData, compressedData) {
+    // Asumsi setiap karakter asli adalah 8 bit (1 byte)
+    const originalSize = originalData.length * 8;
+    const compressedSize = compressedData.length;
+    
+    return {
+      originalSize,
+      compressedSize,
+      ratio: (compressedSize / originalSize * 100).toFixed(2) + '%',
+      savings: ((1 - compressedSize / originalSize) * 100).toFixed(2) + '%'
+    };
+  }
+
+  // Mengubah data biner menjadi representasi byte
+  binaryToBytes(binaryString) {
+    const result = [];
+    
+    // Padding string biner agar panjangnya kelipatan 8
+    const paddedBinary = binaryString.padEnd(
+      Math.ceil(binaryString.length / 8) * 8, '0'
+    );
+    
+    // Konversi setiap 8 bit menjadi byte
+    for (let i = 0; i < paddedBinary.length; i += 8) {
+      const byte = paddedBinary.substr(i, 8);
+      result.push(parseInt(byte, 2));
+    }
+    
+    return Buffer.from(result);
+  }
+
+  // Paket kompresi lengkap untuk API
+  compressForAPI(jsonData) {
+    // Ubah JSON menjadi string
+    const dataString = JSON.stringify(jsonData);
+    
+    // Kompresi data
+    const { compressedData, encodingMap, decodingMap } = this.compress(dataString);
+    
+    // Konversi data biner menjadi bytes untuk transfer efisien
+    const compressedBytes = this.binaryToBytes(compressedData);
+    
+    // Informasi kompresi
+    const compressionInfo = this.calculateCompressionRatio(dataString, compressedData);
+    
+    return {
+      data: compressedBytes.toString('base64'),
+      encodingMap: Buffer.from(JSON.stringify(encodingMap)).toString('base64'),
+      decodingMap: Buffer.from(JSON.stringify(decodingMap)).toString('base64'),
+      metadata: {
+        originalSize: compressionInfo.originalSize,
+        compressedSize: compressionInfo.compressedSize,
+        compressionRatio: compressionInfo.ratio,
+        savings: compressionInfo.savings
+      }
+    };
+  }
+
+  // Dekompresi data API
+  decompressFromAPI(compressedPackage) {
+    // Decode base64
+    const compressedBytes = Buffer.from(compressedPackage.data, 'base64');
+    const decodingMap = JSON.parse(
+      Buffer.from(compressedPackage.decodingMap, 'base64').toString()
+    );
+    
+    // Konversi bytes kembali ke string biner
+    let binaryString = '';
+    for (const byte of compressedBytes) {
+      binaryString += byte.toString(2).padStart(8, '0');
+    }
+    
+    // Decompress data
+    const decompressedString = this.decompress(binaryString, decodingMap);
+    
+    // Parse kembali ke JSON
+    return JSON.parse(decompressedString);
+  }
+}
+
+// Middleware untuk kompresi respons API
+const huffmanCompressor = new HuffmanCompression();
+
+// Endpoint contoh yang menggunakan kompresi Huffman
+app.get('/api/data', (req, res) => {
+  // Data contoh (dalam praktiknya, ini bisa dari database)
+  const largeDataset = {
+    users: [
+      { id: 1, name: "John Doe", email: "john@example.com", role: "admin", department: "IT", location: "New York" },
+      { id: 2, name: "Jane Smith", email: "jane@example.com", role: "user", department: "HR", location: "Chicago" },
+      // Dalam aplikasi nyata, ini bisa berisi ribuan entri
+    ],
+    metadata: {
+      timestamp: new Date().toISOString(),
+      source: "user_database",
+      format: "json",
+      compression: "huffman"
+    }
+  };
+
+  // Opsi kompresi
+  const useCompression = req.query.compressed === 'true';
+  
+  if (useCompression) {
+    // Kompresi data sebelum mengirim
+    const compressedPackage = huffmanCompressor.compressForAPI(largeDataset);
+    res.json({
+      compressed: true,
+      package: compressedPackage
+    });
+  } else {
+    // Kirim data tanpa kompresi
+    res.json({
+      compressed: false,
+      data: largeDataset
+    });
+  }
+});
+
+// Endpoint untuk dekompresi
+app.post('/api/decompress', (req, res) => {
+  try {
+    const decompressedData = huffmanCompressor.decompressFromAPI(req.body.package);
+    res.json({
+      success: true,
+      data: decompressedData
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Memulai server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server berjalan di port ${PORT}`);
+});
+```
+
+## Diagram Cache System dengan Kompresi Huffman
+
+Di bawah ini adalah visualisasi sistem cache yang menggunakan algoritma Huffman untuk mengoptimalkan penyimpanan dan pengambilan data:
+
+```
++---------------------+       +----------------------+       +------------------------+
+|                     |       |                      |       |                        |
+|   Client Request    +------>+  API Backend Server  +------>+  Database (PostgreSQL) |
+|                     |       |                      |       |                        |
++---------------------+       +----------+-----------+       +------------------------+
+                                         |
+                                         | Check Cache First
+                                         |
+                              +----------v-----------+
+                              |                      |
+                              |   Cache Layer        |
+                              |   (Redis/Memcached)  |
+                              |                      |
+                              |   Compressed Data    |
+                              |   Using Huffman      |
+                              |                      |
+                              +----------------------+
+```
+
+## Visualisasi Proses Kompresi Huffman
+
+Berikut adalah visualisasi alur kompresi dan dekompresi menggunakan algoritma Huffman dalam sistem backend:
+
+```
++----------------------+     +------------------------+     +------------------------+
+|                      |     |                        |     |                        |
+| Original JSON Data   +---->+ Calculate Frequencies  +---->+ Build Huffman Tree    |
+|                      |     |                        |     |                        |
++----------------------+     +------------------------+     +-----------+------------+
+                                                                        |
+                                                                        |
++----------------------+     +------------------------+     +------------v-----------+
+|                      |     |                        |     |                        |
+| Compressed Data      +<----+ Apply Encoding Table   +<----+ Generate Encoding     |
+| with Metadata        |     | to Data                |     | Table                  |
+|                      |     |                        |     |                        |
++----------+-----------+     +------------------------+     +------------------------+
+           |
+           | Store or Transfer
+           |
++----------v-----------+     +------------------------+     +------------------------+
+|                      |     |                        |     |                        |
+| Receive Compressed   +---->+ Extract Binary Data    +---->+ Apply Decoding Table  |
+| Data Package         |     | and Decoding Table     |     | to Binary Data        |
+|                      |     |                        |     |                        |
++----------------------+     +------------------------+     +-----------+------------+
+                                                                        |
+                                                                        |
+                                                           +------------v-----------+
+                                                           |                        |
+                                                           | Original JSON Data     |
+                                                           | Restored               |
+                                                           |                        |
+                                                           +------------------------+
+```
+
+## Performance Metrics dan Pertimbangan
+
+Berikut adalah beberapa metrik dan pertimbangan saat mengimplementasikan algoritma Huffman di backend:
+
+1. **Rasio Kompresi**: Biasanya mencapai 20-50% untuk data teks, tergantung karakteristik data.
+
+2. **CPU Overhead**:
+   - Kompresi: Memerlukan waktu untuk membangun pohon dan tabel encoding
+   - Dekompresi: Relatif cepat dibandingkan kompresi
+
+3. **Kasus Penggunaan Optimal**:
+   - Data dengan distribusi frekuensi yang tidak seragam
+   - Data tekstual seperti JSON, HTML, atau log
+   - Transfer data dalam jumlah besar
+
+4. **Pertimbangan Implementasi**:
+   - Simpan tabel encoding/decoding untuk file atau data yang diakses berulang kali
+   - Gunakan worker threads untuk kompresi data besar agar tidak memblokir event loop
+   - Pertimbangkan teknik hibrid (Huffman + algoritma lain) untuk rasio kompresi yang lebih baik
+   - Cache hasil kompresi untuk data yang sering diakses
+
+5. **Trade-offs**:
+   - Kompresi membutuhkan waktu pemrosesan CPU tetapi mengurangi I/O dan transfer data
+   - Dekompresi membutuhkan CPU tambahan pada sisi klien
+   - Pengiriman tabel encoding/decoding menambah overhead, tetapi diperlukan untuk dekompresi
+
+## Contoh Analisis Kasus Nyata
+
+Untuk REST API yang melayani 1000 permintaan/menit dengan rata-rata payload 100KB:
+
+**Tanpa Kompresi**:
+- Bandwidth per bulan: ~4.32 TB
+
+**Dengan Kompresi Huffman (asumsi rasio 40%)**:
+- Bandwidth per bulan: ~1.73 TB
+- Penghematan: 2.59 TB per bulan
+- Pengurangan waktu respons untuk koneksi lambat: ~60%
+
+Peningkatan performa ini signifikan terutama untuk aplikasi mobile dan di daerah dengan infrastruktur internet terbatas.
+
+## Kesimpulan
+
+Algoritma Huffman menawarkan solusi kompresi yang efisien untuk backend, terutama untuk sistem yang menangani volume data besar atau memiliki keterbatasan bandwidth. Meskipun algoritma kompresi modern lainnya (seperti GZIP, Brotli) mungkin menawarkan rasio kompresi yang lebih baik, Huffman tetap menjadi blok bangunan penting dalam teknik kompresi dan memberikan keseimbangan yang baik antara kompleksitas dan efisiensi.
 
 
 
