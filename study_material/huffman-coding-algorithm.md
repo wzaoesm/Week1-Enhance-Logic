@@ -61,6 +61,7 @@ function buildHuffmanTable(root, prefix = '', table = {}) {
 }
 
 function huffmanEncode(data) {
+  // Hitung frekuensi setiap simbol
   const freqs = {};
   for (const symbol of data) {
     if (!freqs[symbol]) {
@@ -70,9 +71,23 @@ function huffmanEncode(data) {
   }
 
   const symbols = Object.keys(freqs);
+  
+  // Kasus khusus: jika hanya ada satu simbol unik
+  if (symbols.length === 1) {
+    const table = {};
+    table[symbols[0]] = '0'; // Beri kode '0' untuk satu-satunya simbol
+    let encodedData = '';
+    for (let i = 0; i < data.length; i++) {
+      encodedData += '0';
+    }
+    return { encodedData, table };
+  }
+  
+  // Bangun pohon Huffman dan tabel kode
   const root = buildHuffmanTree(symbols, symbols.map(symbol => freqs[symbol]));
   const table = buildHuffmanTable(root);
 
+  // Kodekan data dengan tabel yang sudah dibuat
   let encodedData = '';
   for (const symbol of data) {
     encodedData += table[symbol];
@@ -81,12 +96,39 @@ function huffmanEncode(data) {
   return { encodedData, table };
 }
 
-const data = 'huffman_algorithm_example';
+function huffmanDecode(encodedData, table) {
+  // Invert table untuk memudahkan decoding
+  const reverseTable = {};
+  for (const symbol in table) {
+    reverseTable[table[symbol]] = symbol;
+  }
+  
+  let decodedData = '';
+  let currentCode = '';
+  
+  for (const bit of encodedData) {
+    currentCode += bit;
+    if (reverseTable[currentCode]) {
+      decodedData += reverseTable[currentCode];
+      currentCode = '';
+    }
+  }
+  
+  return decodedData;
+}
+
+// Contoh penggunaan
+const data = 'huffmanalgorithm_example';
 const { encodedData, table } = huffmanEncode(data);
 
 console.log('Original data:', data);
 console.log('Encoded data:', encodedData);
 console.log('Huffman table:', table);
+
+// Decode untuk memverifikasi
+const decodedData = huffmanDecode(encodedData, table);
+console.log('Decoded data:', decodedData);
+console.log('Verification:', data === decodedData ? 'Successful' : 'Failed');
 ```
 
 ## Berikut ini adalah contoh visualisasi langkah-langkah Huffman Coding Algorithm dengan data berikut: "huffmanalgorithm_example"
@@ -140,7 +182,8 @@ Berikut adalah daftar simpul yang dibuat berdasarkan frekuensi kemunculan setiap
 
 Berdasarkan priority queue, kita bisa menggabungkan simpul-simpul dengan frekuensi terendah untuk membentuk pohon Huffman. Di bawah ini adalah visualisasi pohon Huffman yang terbentuk:
 
-![image](https://github.com/user-attachments/assets/ea3bd571-c838-4692-ba2c-464a2685600d)
+![image](https://github.com/user-attachments/assets/a48e8d55-c5ba-4804-b100-ffdbfb498a49)
+
 
 <br/>
 
