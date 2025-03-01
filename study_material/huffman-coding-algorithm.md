@@ -180,7 +180,8 @@ Berikut adalah daftar simpul yang dibuat berdasarkan frekuensi kemunculan setiap
 
 Berdasarkan priority queue, kita bisa menggabungkan simpul-simpul dengan frekuensi terendah untuk membentuk pohon Huffman. Di bawah ini adalah visualisasi pohon Huffman yang terbentuk:
 
-![image](https://github.com/user-attachments/assets/4a94b599-c16b-4a0d-b5e0-eae8c99abbce)
+![image](https://github.com/user-attachments/assets/527d182a-65fe-40ba-8c29-d4a2d6696a92)
+
 
 
 
@@ -193,29 +194,62 @@ Setelah pohon Huffman terbentuk, kita dapat membuat tabel kode Huffman dengan me
 
 Dengan mengikuti algoritma pembuatan kode Huffman berdasarkan pohon yang telah kita bangun, kita bisa mendapatkan kode unik untuk setiap karakter. Berikut adalah contoh kode Huffman yang mungkin dihasilkan:
 
-- a: 00 (frekuensi: 3)
-- m: 01 (frekuensi: 3)
-- e: 100 (frekuensi: 2)
-- f: 101 (frekuensi: 2)
-- h: 110 (frekuensi: 2)
-- g: 11100 (frekuensi: 1)
-- i: 11101 (frekuensi: 1)
-- l: 11110 (frekuensi: 1)
-- n: 111110 (frekuensi: 1)
-- o: 111111 (frekuensi: 1)
-- p: 1000000 (frekuensi: 1)
-- r: 1000001 (frekuensi: 1)
-- t: 1000010 (frekuensi: 1)
-- u: 1000011 (frekuensi: 1)
-- x: 1000100 (frekuensi: 1)
-- _: 1000101 (frekuensi: 1)
+| Karakter | Frekuensi | Kode Huffman |
+|----------|-----------|--------------|
+| a        | 3         | 100          |
+| m        | 3         | 011          |
+| _        | 1         | 0011         |
+| e        | 2         | 1101         |
+| f        | 2         | 1011         |
+| h        | 2         | 1010         |
+| i        | 1         | 0001         |
+| l        | 2         | 1100         |
+| p        | 1         | 0101         |
+| r        | 1         | 0000         |
+| t        | 1         | 0010         |
+| x        | 1         | 0100         |
+| g        | 1         | 11110        |
+| n        | 1         | 11101        |
+| o        | 1         | 11111        |
+| u        | 1         | 11100        |
 
-Perhatikan bahwa karakter dengan frekuensi lebih tinggi ('a' dan 'm' dengan 3 kemunculan) mendapatkan kode yang lebih pendek (2 bit), sedangkan karakter dengan frekuensi lebih rendah mendapatkan kode yang lebih panjang. Ini adalah inti dari kompresi Huffman - membuat representasi yang lebih efisien dengan memberikan kode yang lebih pendek untuk simbol yang lebih sering muncul.
+## Analisis Kompresi
+
+- **Jumlah karakter dalam string**: 24 karakter
+- **Ukuran data tanpa kompresi**: 24 × 8 = 192 bit (mengasumsikan 8 bit per karakter)
+- **Ukuran data dengan kompresi Huffman**:
+  - a (3×): 3 × 3 = 9 bit
+  - m (3×): 3 × 3 = 9 bit
+  - _ (1×): 1 × 4 = 4 bit
+  - e (2×): 2 × 4 = 8 bit
+  - f (2×): 2 × 4 = 8 bit
+  - h (2×): 2 × 4 = 8 bit
+  - i (1×): 1 × 4 = 4 bit
+  - l (2×): 2 × 4 = 8 bit
+  - p (1×): 1 × 4 = 4 bit
+  - r (1×): 1 × 4 = 4 bit
+  - t (1×): 1 × 4 = 4 bit
+  - x (1×): 1 × 4 = 4 bit
+  - g (1×): 1 × 5 = 5 bit
+  - n (1×): 1 × 5 = 5 bit
+  - o (1×): 1 × 5 = 5 bit
+  - u (1×): 1 × 5 = 5 bit
+  - **Total**: 94 bit
+
+- **Rasio kompresi**: 94/192 ≈ 49.0%
+
+
+Dengan menggunakan algoritma Huffman, ukuran data untuk string "huffmanalgorithm_example" berhasil dikurangi dari 192 bit menjadi 94 bit, memberikan penghematan ruang sekitar 51.0%.
+
+Karakter yang lebih sering muncul (seperti 'a' dan 'm' yang muncul 3 kali) mendapatkan kode yang lebih pendek, sedangkan karakter yang jarang muncul mendapatkan kode yang lebih panjang. Ini adalah prinsip utama dari kompresi Huffman.
 
 ### 5. Kodekan Data dengan Tabel Kode Huffman
 
 Menggunakan tabel kode Huffman yang telah dibuat, kita dapat mengkodekan data asli "huffmanalgorithm_example" dengan menggantikan setiap simbol dengan kode binernya.
 
+```
+Encoded data: 1010111001011101101110011101100110011110111110000000100101010011001111010100100011010111001101
+```
 
 #### Harap diingat bahwa contoh visualisasi di atas hanya merupakan ilustrasi sederhana dari langkah-langkah dalam Huffman Coding Algorithm. Implementasi sebenarnya akan lebih rumit dan melibatkan lebih banyak kode.
 
@@ -658,6 +692,7 @@ Peningkatan performa ini signifikan terutama untuk aplikasi mobile dan di daerah
 ## Kesimpulan
 
 Algoritma Huffman menawarkan solusi kompresi yang efisien untuk backend, terutama untuk sistem yang menangani volume data besar atau memiliki keterbatasan bandwidth. Meskipun algoritma kompresi modern lainnya (seperti GZIP, Brotli) mungkin menawarkan rasio kompresi yang lebih baik, Huffman tetap menjadi blok bangunan penting dalam teknik kompresi dan memberikan keseimbangan yang baik antara kompleksitas dan efisiensi.
+
 
 
 
